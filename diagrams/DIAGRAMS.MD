@@ -10,3 +10,4 @@ The included diagrams have been created using [draw.io](https://app.diagrams.net
 	- NOTE: Initially attempted to include this view within the main `miqa-store` diagram but things became much too cluttered.
 - `miqa-components-hierarchy.drawio` - Displays the hierarchy of Vue components in MIQA.
 	- NOTE: The first tab displays with `<UserAvatar>`, the second without. This makes the second tab much less cluttered.
+- `miqa-experiments-sfc.draw` - Displays the functions operative in the `ExperimentsView` component.
