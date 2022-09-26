@@ -1,0 +1,114 @@
+```js
+{
+  "id": "1ec0847e-b324-4bf4-9b42-bf11215fdea4",
+  "name": "NCANDA_E08710_ncanda-t1spgr-v1",
+  "experiment": "c06a53c8-3d1e-479e-9c13-731886a69b47",
+  "cumulativeRange": [
+    1.7976931348623157e+308,
+    -1.7976931348623157e+308
+  ],
+  "decisions": [
+    {
+      "id": "39c4adf9-27fe-41a6-b975-9206c2e7df6b",
+      "decision": "U",
+      "creator": {
+        "id": 1,
+        "username": "someone@email.com",
+        "email": "someone@email.com",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": ""
+      },
+      "created": "26-09-2022",
+      "note": "sss",
+      "user_identified_artifacts": {
+        "air broncogram": -1,
+        "bulging margin": 1,
+        "normal_variants": -1
+      },
+      "location": {
+        "i": -2.669001579284668,
+        "j": -19.531,
+        "k": -2.8255
+      }
+    },
+    {
+      "id": "16ab4f0d-8f51-4fb4-8ba3-d7001b8157ec",
+      "decision": "U",
+      "creator": {
+        "id": 1,
+        "username": "someone@email.com",
+        "email": "someone@email.com",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": ""
+      },
+      "created": "13-09-2022",
+      "note": "",
+      "user_identified_artifacts": {
+        "air broncogram": 1,
+        "bulging margin": -1,
+        "normal_variants": -1
+      },
+      "location": {
+        "i": -2.669001579284668,
+        "j": -19.531,
+        "k": -2.8255
+      }
+    },
+    {
+      "id": "2eba2de8-8966-43de-9ba7-00fbb75267b9",
+      "decision": "U",
+      "creator": {
+        "id": 1,
+        "username": "dave@davemackey.net",
+        "email": "dave@davemackey.net",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": ""
+      },
+      "created": "13-09-2022",
+      "note": "",
+      "user_identified_artifacts": {
+        "air broncogram": -1,
+        "bulging margin": 0,
+        "normal_variants": -1
+      },
+      "location": {
+        "i": -2.669001579284668,
+        "j": -19.531,
+        "k": -2.8255
+      }
+    },
+    {
+      "id": "2238707a-33aa-4021-b966-3fd58c305bdb",
+      "decision": "U",
+      "creator": {
+        "id": 1,
+        "username": "dave@davemackey.net",
+        "email": "dave@davemackey.net",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": ""
+      },
+      "created": "13-09-2022",
+      "note": "",
+      "user_identified_artifacts": {
+        "air broncogram": 1,
+        "bulging margin": -1,
+        "normal_variants": -1
+      },
+      "location": {
+        "i": -2.669001579284668,
+        "j": -19.531,
+        "k": -2.8255
+      }
+    }
+  ],
+  "sessionID": null,
+  "subjectID": null,
+  "link": null,
+  "decision": "U",
+  "color": "green--text"
+}
+```
