@@ -62,8 +62,16 @@ export default function addRegistrationAPI(publicAPI, model) {
     return proxy;
   }
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * If our `model.activeSource` and argument `source` are not equal, we
+   * ensure that `model.activeSourceSubscription` is not set, then
+   * we set `model.activeSource` equal to `source` and set `model.activeSourceSubscription`
+   * to be the current `source`s modification timestamp.
+   * 
+   * We call `publicAPI.modifed` and `publicAPI.invokeActiveSourceChange`
+   * 
+   * @param {*} source 
+   */
   publicAPI.setActiveSource = (source) => {
     if (model.activeSource !== source) {
       if (model.activeSourceSubscription) {
@@ -79,6 +87,12 @@ export default function addRegistrationAPI(publicAPI, model) {
     }
   };
 
+  /**
+   * Essentially identical to `setActiveSource` above except we are acting on
+   * `model.activeView` and `model.activeViewSubscription`
+   * 
+   * @param {*} view 
+   */
   publicAPI.setActiveView = (view) => {
     if (model.activeView !== view) {
       if (model.activeViewSubscription) {
@@ -94,35 +108,49 @@ export default function addRegistrationAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
+  // Below we set up proxy access to the model, this allows
+  // us to use the proxy to access the model, see Proxy Design Pattern
 
+  
+  // publicAPI.getProxyById(id) == model.proxyIdMapping[id]
   publicAPI.getProxyById = (id) => model.proxyIdMapping[id];
 
-  // --------------------------------------------------------------------------
-
+  // publicAPI.getProxyGroups == model.proxyByGroup
   publicAPI.getProxyGroups = () => Object.keys(model.proxyByGroup);
 
-  // --------------------------------------------------------------------------
-
+  // publicAPI.getProxyInGroup(name) == model.proxyByGroup[name]
   publicAPI.getProxyInGroup = (name) =>
     [].concat(model.proxyByGroup[name] || []);
 
-  // --------------------------------------------------------------------------
-
+  // publicAPI.getSources == model.proxyByGroup.Sources
   publicAPI.getSources = () => [].concat(model.proxyByGroup.Sources || []);
+
+  // publicAPI.getRepresentations == model.proxyByGroup.Representations
   publicAPI.getRepresentations = () =>
     [].concat(model.proxyByGroup.Representations || []);
+
+  // publicAPI.getViews == model.proxyByGroup.Views
   publicAPI.getViews = () => [].concat(model.proxyByGroup.Views || []);
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * Creates a proxy
+   * 
+   * @param {*} group 
+   * @param {*} name 
+   * @param {*} options 
+   * @returns 
+   */
   publicAPI.createProxy = (group, name, options) => {
     const { definitions } = model.proxyConfiguration;
+    // If the proxyConfiguration doesn't have group or group name
     if (!definitions[group] || !definitions[group][name]) {
       return null;
     }
     const definition = definitions[group][name];
+    // We combine the options of the existing proxyConfiguration.definitions[group][name].options
+    // with the options passed in
     const definitionOptions = { ...definition.options, ...options };
+    // TODO: What is .class?
     const proxy = definition.class.newInstance({
       ...definitionOptions,
       proxyGroup: group,
@@ -130,7 +158,7 @@ export default function addRegistrationAPI(publicAPI, model) {
       proxyManager: publicAPI,
     });
 
-    // Handle proxy property settings
+    // Create a proxy property for each property thats exists on the model
     if (definition.proxyProps) {
       const proxyMap = {};
       Object.keys(definition.proxyProps).forEach((key) => {
@@ -144,7 +172,7 @@ export default function addRegistrationAPI(publicAPI, model) {
       proxy.set(proxyMap);
     }
 
-    // Handle property setting
+    // Set the proxy properties equal to the model's properties
     if (definition.props) {
       proxy.set(definition.props);
     }
@@ -152,19 +180,26 @@ export default function addRegistrationAPI(publicAPI, model) {
     registerProxy(proxy);
 
     if (definitionOptions.activateOnCreate) {
+      // TODO: What exactly does it mean to activate?
       proxy.activate();
     }
 
     return proxy;
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * Given a source and view we reutrn a representation.
+   * 
+   * @param {*} source 
+   * @param {*} view 
+   * @returns 
+   */
   publicAPI.getRepresentation = (source, view) => {
+    // If source/view is not provided, use the publicAPI to get them
     const sourceToUse = source || publicAPI.getActiveSource();
     const viewToUse = view || publicAPI.getActiveView();
 
-    // Can only get a representation for a source and a view
+    // We can only get a representation for a source and a view
     if (!sourceToUse || !viewToUse || !sourceToUse.getType()) {
       return null;
     }
@@ -172,12 +207,17 @@ export default function addRegistrationAPI(publicAPI, model) {
     const sourceId = sourceToUse.getProxyId();
     const viewId = viewToUse.getProxyId();
 
+    // TODO: sv2r = Source+View to Representation Mapping?
     let viewRepMap = model.sv2rMapping[sourceId];
+
     if (!viewRepMap) {
       viewRepMap = {};
       model.sv2rMapping[sourceId] = viewRepMap;
     }
+
     let rep = viewRepMap[viewId];
+
+    // If we don't have a valid representation
     if (!rep) {
       const viewName = viewToUse.getProxyName();
       const sourceType = sourceToUse.getType();
@@ -189,6 +229,8 @@ export default function addRegistrationAPI(publicAPI, model) {
         );
         return null;
       }
+
+      // Creates a Representations proxy
       rep = publicAPI.createProxy(
         'Representations',
         definition.name,
@@ -204,8 +246,11 @@ export default function addRegistrationAPI(publicAPI, model) {
     return rep;
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * Remove a proxy
+   * 
+   * @param {*} proxy 
+   */
   publicAPI.deleteProxy = (proxy) => {
     const group = proxy.getProxyGroup().toLowerCase();
 
