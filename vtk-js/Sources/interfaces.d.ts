@@ -36,6 +36,7 @@ export interface vtkAlgorithm {
 
 	/**
 	 * Assign a data object as input.
+	 * 
 	 * @param dataset The dataset object.
 	 * @param {Number} [port] The port number (default 0).
 	 */
@@ -59,6 +60,7 @@ export interface vtkAlgorithm {
 
 	/**
 	 * Add a connection to the given input port index.
+	 * 
 	 * @param {vtkPipelineConnection} outputPort 
 	 */
 	addInputConnection(outputPort: vtkPipelineConnection): void;
@@ -72,45 +74,41 @@ export interface vtkAlgorithm {
 	/**
 	 * Get the data object that will contain the algorithm output for the given
 	 * port.
+	 * 
 	 * @param {Number} [port] The port number (default 0).
 	 */
 	getOutputData(port?: number): any;
 
-	/**
-	 * 
-	 */
+	// True/False
 	shouldUpdate(): boolean;
 
 	/**
 	 * Get a proxy object corresponding to the given output port of this
 	 * algorithm. 
+	 * 
 	 * @param {Number} [port] The port number (default 0).
 	 */
 	getOutputPort(port?: number): vtkPipelineConnection;
 
-	/**
-	 * Bring this algorithm's outputs up-to-date.
-	 */
+	// Bring this algorithm's outputs up-to-date.
 	update(): void;
 
-	/**
-	 * Get the number of input ports used by the algorithm.
-	 */
+	// Get the number of input ports used by the algorithm.	
 	getNumberOfInputPorts(): number;
 
-	/**
-	 * Get the number of output ports provided by the algorithm.
-	 */
+	// Get the number of output ports provided by the algorithm.
 	getNumberOfOutputPorts(): number;
 
 	/**
 	 * Get the actual data array for the input array sepcified by idx.
+	 * 
 	 * @param {Number} port (default 0)
 	 */
 	getInputArrayToProcess(inputPort?: number): vtkDataArray;
 
 	/**
 	 * Set the input data arrays that this algorithm will process. 
+	 * 
 	 * @param {Number} inputPort The port number.
 	 * @param {String} arrayName The name of the array.
 	 * @param {String} fieldAssociation The name of the association field.
@@ -131,6 +129,7 @@ export interface vtkObject {
 	
 	/**
 	 * Allow to check if that object was deleted (.delete() was called before).
+	 * 
 	 * @returns true if delete() was previously called
 	 */
 	isDeleted(): boolean;

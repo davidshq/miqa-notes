@@ -1,4 +1,4 @@
-import macro from 'vtk.js/Sources/macros';
+import macro from './../../../macros';
 
 import core from './core';
 import state from './state';
@@ -6,10 +6,10 @@ import view from './view';
 import properties from './properties';
 
 /**
- * 
- * @param {*} publicAPI 
- * @param {*} model 
- * @param {*} initialValues 
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ * @param {*} initialValues
  */
 export function extend(publicAPI, model, initialValues = {}) {
   Object.assign(

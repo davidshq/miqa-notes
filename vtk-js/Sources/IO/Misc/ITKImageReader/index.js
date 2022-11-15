@@ -1,4 +1,4 @@
-import macro from 'vtk.js/Sources/macros';
+import macro from '../../../macros';
 import ITKHelper from 'vtk.js/Sources/Common/DataModel/ITKHelper';
 
 const { convertItkToVtkImage } = ITKHelper;
@@ -31,9 +31,9 @@ function setReadImageArrayBufferFromITK(fn) {
 
 /**
  * vtkITKImageReader methods
- * 
- * @param {*} publicAPI 
- * @param {*} model 
+ *
+ * @param {*} publicAPI
+ * @param {*} model
  */
 function vtkITKImageReader(publicAPI, model) {
   // Set our className

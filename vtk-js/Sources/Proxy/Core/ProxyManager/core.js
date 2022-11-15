@@ -1,18 +1,18 @@
-import macro from 'vtk.js/Sources/macros';
+import macro from './../../../macros';
 
 const { vtkErrorMacro } = macro;
 
 /**
  * Proxy Registration Handling: addRegistrationAPI
- * 
- * @param {*} publicAPI 
- * @param {*} model 
+ *
+ * @param {*} publicAPI
+ * @param {*} model
  */
 export default function addRegistrationAPI(publicAPI, model) {
   /**
-   * 
-   * @param {*} proxy 
-   * @returns 
+   *
+   * @param {*} proxy
+   * @returns
    */
   function registerProxy(proxy) {
     if (!proxy) {
@@ -42,9 +42,9 @@ export default function addRegistrationAPI(publicAPI, model) {
 
   /**
    * Proxy Deregistration
-   * 
-   * @param {*} proxyOrId 
-   * @returns 
+   *
+   * @param {*} proxyOrId
+   * @returns
    */
   function unRegisterProxy(proxyOrId) {
     const id = proxyOrId.getProxyId ? proxyOrId.getProxyId() : proxyOrId;
@@ -78,10 +78,10 @@ export default function addRegistrationAPI(publicAPI, model) {
    * ensure that `model.activeSourceSubscription` is not set, then
    * we set `model.activeSource` equal to `source` and set `model.activeSourceSubscription`
    * to be the current `source`s modification timestamp.
-   * 
+   *
    * We call `publicAPI.modifed` and `publicAPI.invokeActiveSourceChange`
-   * 
-   * @param {*} source 
+   *
+   * @param {*} source
    */
   publicAPI.setActiveSource = (source) => {
     if (model.activeSource !== source) {
@@ -101,8 +101,8 @@ export default function addRegistrationAPI(publicAPI, model) {
   /**
    * Essentially identical to `setActiveSource` above except we are acting on
    * `model.activeView` and `model.activeViewSubscription`
-   * 
-   * @param {*} view 
+   *
+   * @param {*} view
    */
   publicAPI.setActiveView = (view) => {
     if (model.activeView !== view) {
@@ -122,7 +122,7 @@ export default function addRegistrationAPI(publicAPI, model) {
   // Below we set up proxy access to the model, this allows
   // us to use the proxy to access the model, see Proxy Design Pattern
 
-  
+
   // publicAPI.getProxyById(id) == model.proxyIdMapping[id]
   publicAPI.getProxyById = (id) => model.proxyIdMapping[id];
 
@@ -145,11 +145,11 @@ export default function addRegistrationAPI(publicAPI, model) {
 
   /**
    * Creates a proxy
-   * 
-   * @param {*} group 
-   * @param {*} name 
-   * @param {*} options 
-   * @returns 
+   *
+   * @param {*} group
+   * @param {*} name
+   * @param {*} options
+   * @returns
    */
   publicAPI.createProxy = (group, name, options) => {
     const { definitions } = model.proxyConfiguration;
@@ -200,10 +200,10 @@ export default function addRegistrationAPI(publicAPI, model) {
 
   /**
    * Given a source and view we reutrn a representation.
-   * 
-   * @param {*} source 
-   * @param {*} view 
-   * @returns 
+   *
+   * @param {*} source
+   * @param {*} view
+   * @returns
    */
   publicAPI.getRepresentation = (source, view) => {
     // If source/view is not provided, use the publicAPI to get them
@@ -259,8 +259,8 @@ export default function addRegistrationAPI(publicAPI, model) {
 
   /**
    * Remove a proxy
-   * 
-   * @param {*} proxy 
+   *
+   * @param {*} proxy
    */
   publicAPI.deleteProxy = (proxy) => {
     const group = proxy.getProxyGroup().toLowerCase();
