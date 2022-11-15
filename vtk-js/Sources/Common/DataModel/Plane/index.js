@@ -210,10 +210,12 @@ export const STATIC = {
     COINCIDE,
 };
 
-// ----------------------------------------------------------------------------
-// vtkPlane methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkPlane Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 export function vtkPlane(publicAPI, model) {
     // Set our className
     model.classHierarchy.push('vtkPlane');
@@ -292,7 +294,5 @@ export function extend(publicAPI, model, initialValues = {}) {
 // ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkPlane');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend, ...STATIC };

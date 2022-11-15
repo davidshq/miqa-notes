@@ -1,9 +1,6 @@
 import { vtkObject } from "../../../interfaces" ;
 import { Vector3 } from "../../../types";
 
-/**
- *
- */
 export interface IPlaneInitialValues {
     normal?: Vector3;
     origin?: Vector3;
@@ -22,6 +19,7 @@ export interface vtkPlane extends vtkObject {
     /**
      * Get the distance of a point x to a plane defined by n (x-p0) = 0.
      * The normal n must be magnitude = 1.
+     *
      * @param {Vector3} x The point coordiante.
      */
     distanceToPlane(x: Vector3): number;
@@ -38,14 +36,10 @@ export interface vtkPlane extends vtkObject {
      */
     getNormalByReference(): Vector3;
 
-    /**
-     * Get the origin of the plane
-     */
+    // Get the origin of the plane
     getOrigin(): Vector3;
 
-    /**
-     * Get the origin of the plane
-     */
+    // Get the origin of the plane
     getOriginByReference(): Vector3;
 
     /**
@@ -57,6 +51,7 @@ export interface vtkPlane extends vtkObject {
 
     /**
      * Project a vector v onto plane. The projected vector is returned in vproj.
+     *
      * @param {Vector3} v The vector coordinate.
      * @param {Vector3} vproj The projection vector's coordinate..
      */
@@ -65,6 +60,7 @@ export interface vtkPlane extends vtkObject {
     /**
      * Translate the plane in the direction of the normal by the distance
      * specified. Negative values move the plane in the opposite direction.
+     *
      * @param {Number} distance
      */
     push(distance: number): void;
@@ -85,6 +81,7 @@ export interface vtkPlane extends vtkObject {
      * plane.evaluateFunction([0.0, 0.0, 0.0]);
      * plane.evaluateFunction(0.0, 0.0, 0.0);
      * ```
+     *
      * @param {Number} x The x coordinate.
      * @param {Number} y The y coordinate.
      * @param {Number} z The z coordinate.
@@ -100,6 +97,7 @@ export interface vtkPlane extends vtkObject {
      * plane.evaluateFunction([0.0, 0.0, 0.0]);
      * plane.evaluateFunction(0.0, 0.0, 0.0);
      * ```
+     *
      * @param {Vector3} value
      */
     evaluateFunction(value: Vector3): number;
@@ -108,6 +106,7 @@ export interface vtkPlane extends vtkObject {
      * Given the point xyz (three floating values) evaluate the equation for the
      * plane gradient. Note that the normal and origin must have already been
      * specified. The method returns an array of three floats.
+     *
      * @param xyz
      */
     evaluateGradient(xyz: any): Vector3;
@@ -130,6 +129,7 @@ export interface vtkPlane extends vtkObject {
      *
      * If the plane and line are parallel, intersection is false and t is set to
      * Number.MAX_VALUE.
+     *
      * @param {Vector3} p1 The first point coordiante.
      * @param {Vector3} p2 The second point coordiante.
      */
@@ -151,6 +151,7 @@ export interface vtkPlane extends vtkObject {
      * - **l1** (_Array_): coordinates of point 1 of the intersection line.
      * - **error** (_String|null_): Conditional, if the planes do not intersect,
      *   is it because they are coplanar (`COINCIDE`) or parallel (`DISJOINT`).
+     *
      * @param {Vector3} planeOrigin
      * @param {Vector3} planeNormal
      */
@@ -158,12 +159,14 @@ export interface vtkPlane extends vtkObject {
 
     /**
      * Set the normal of the plane.
+     *
      * @param {Vector3} normal The normal coordinate.
      */
     setNormal(normal: Vector3): boolean;
 
     /**
      * Set the normal of the plane.
+     *
      * @param {Number} x The x coordinate.
      * @param {Number} y The y coordinate.
      * @param {Number} z The z coordinate.
@@ -172,18 +175,21 @@ export interface vtkPlane extends vtkObject {
 
     /**
      * Set the normal object.
+     *
      * @param {Vector3} normal The normal coordinate.
      */
     setNormalFrom(normal: Vector3): boolean;
 
     /**
      * Set the origin of the plane.
+     *
      * @param {Vector3} origin The coordinate of the origin point.
      */
     setOrigin(origin: Vector3): boolean;
 
     /**
      * Set the origin of the plane.
+     *
      * @param {Number} x The x coordinate of the origin point.
      * @param {Number} y The y coordinate of the origin point.
      * @param {Number} z The z coordinate of the origin point.
@@ -192,6 +198,7 @@ export interface vtkPlane extends vtkObject {
 
     /**
      * Set the origin of the plane.
+     *
      * @param {Vector3} origin The coordinate of the origin point.
      */
     setOriginFrom(origin: Vector3): boolean;
@@ -208,12 +215,14 @@ export function extend(publicAPI: object, model: object, initialValues?: IPlaneI
 
 /**
  * Method used to create a new instance of vtkPlane.
+ *
  * @param {IPlaneInitialValues} [initialValues] for pre-setting some of its content
  */
 export function newInstance(initialValues?: IPlaneInitialValues): vtkPlane;
 
 /**
  * Quick evaluation of plane equation n(x-origin) = 0.
+ *
  * @static
  * @param {Vector3} normal
  * @param {Vector3} origin The coordinate of the origin point.
@@ -224,6 +233,7 @@ export function evaluate(normal: Vector3, origin: Vector3, x: Vector3): number;
 /**
  * Return the distance of a point x to a plane defined by n (x-p0) = 0.
  * The normal n must be magnitude = 1.
+ *
  * @static
  * @param {Vector3} x
  * @param {Vector3} origin The coordinate of the origin point.
@@ -236,6 +246,7 @@ export function distanceToPlane(x: Vector3, origin: Vector3, normal: Vector3): n
  * is returned in xproj.
  * !!! note
  *     normal assumed to have magnitude 1.
+ *
  * @static
  * @param {Vector3} x
  * @param {Vector3} origin The coordinate of the origin point.
@@ -247,6 +258,7 @@ export function projectPoint(x: any, origin: Vector3, normal: Vector3, xproj: Ve
 /**
  * Project a vector v onto a plane defined by a normal. The projected vector is
  * returned in vproj.
+ *
  * @static
  * @param {Vector3} v The vector coordinate.
  * @param {Vector3} normal
@@ -260,6 +272,7 @@ export function projectVector(v: Vector3, normal: Vector3, vproj: Vector3,): voi
  *
  * !!! note
  *     normal does NOT have to have magnitude 1.
+ *
  * @static
  * @param {Vector3} x
  * @param {Vector3} origin The coordinate of the origin point.
@@ -284,6 +297,7 @@ export function generalizedProjectPoint(x: any, origin: Vector3, normal: Vector3
  *
  * If the plane and line are parallel, intersection is false and t is set to
  * Number.MAX_VALUE.
+ *
  * @static
  * @param {Vector3} p1
  * @param {Vector3} p2
@@ -309,6 +323,7 @@ export function intersectWithLine(p1: Vector3, p2: Vector3, origin: Vector3, nor
  *  - **l1** (_Array_): coordinates of point 1 of the intersection line.
  *  - **error** (_String|null_): Conditional, if the planes do not intersect,
  *    is it because they are coplanar (`COINCIDE`) or parallel (`DISJOINT`).
+ *
  * @static
  * @param {Vector3} plane1Origin
  * @param {Vector3} plane1Normal
@@ -317,14 +332,10 @@ export function intersectWithLine(p1: Vector3, p2: Vector3, origin: Vector3, nor
  */
 export function intersectWithPlane(plane1Origin: Vector3, plane1Normal: Vector3, plane2Origin: Vector3, plane2Normal: Vector3): IIntersectWithLine;
 
-/**
- * Constants for the `intersectWithPlane` function.
- */
+// Constants for the `intersectWithPlane` function.
 export declare const COINCIDE: string;
 
-/**
- * Constants for the `intersectWithPlane` function.
- */
+// Constants for the `intersectWithPlane` function.
 export declare const DISJOINT: string;
 
 /**

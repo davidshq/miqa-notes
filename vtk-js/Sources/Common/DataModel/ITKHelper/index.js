@@ -72,8 +72,11 @@ const itkComponentTypeToVtkArrayType = new Map([
 
 /**
  * Converts an itk-wasm Image to a vtk.js vtkImageData.
- *
  * Requires an itk-wasm Image as input.
+ *
+ * @param {*} itkImage
+ * @param {*} options
+ * @returns
  */
 function convertItkToVtkImage(itkImage, options = {}) {
     const vtkImage = {
@@ -199,6 +202,9 @@ function convertItkToVtkImage(itkImage, options = {}) {
  *
  * Requires a vtk.js vtkImageData as input.
  *
+ * @param {*} vtkImage
+ * @param {*} copyData
+ * @returns
  */
 function convertVtkToItkImage(vtkImage, copyData = false) {
     const dimension = 3;

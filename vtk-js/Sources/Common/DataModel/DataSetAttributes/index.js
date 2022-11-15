@@ -6,10 +6,12 @@ import vtkDataArray from '../../../Common/Core/DataArray';
 const { AttributeTypes, AttributeCopyOperations } = Constants;
 const { vtkWarningMacro } = macro;
 
-// ----------------------------------------------------------------------------
-// vtkDataSetAttributes methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkDataSetAttributes Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 function vtkDataSetAttributes(publicAPI, model) {
     const attrTypes = [
         'Scalars',
@@ -281,7 +283,5 @@ export function extend(publicAPI, model, initialValues = {}) {
 // ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkDataSetAttributes');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend, ...Constants };

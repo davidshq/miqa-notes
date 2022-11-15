@@ -4,10 +4,12 @@ import vtkDataArray from '../../../Common/Core/DataArray';
 
 const { vtkErrorMacro, vtkWarningMacro } = macro;
 
-// ----------------------------------------------------------------------------
-// vtkFieldData methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkFieldData Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 function vtkFieldData(publicAPI, model) {
     model.classHierarchy.push('vtkFieldData');
     const superGetState = publicAPI.getState;
@@ -277,7 +279,5 @@ export function extend(publicAPI, model, initialValues = {}) {
 // ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkFieldData');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend };

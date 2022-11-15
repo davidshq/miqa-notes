@@ -21,40 +21,24 @@ export enum AttributeLimitTypes {
 }
 
 export enum CellGhostTypes {
-    /**
-     * The cell is present on multiple processors
-     */
+    // The cell is present on multiple processors
     DUPLICATECELL,
-    /**
-     * The cell has more neighbors than in a regular mesh
-     */
+    // The cell has more neighbors than in a regular mesh
     HIGHCONNECTIVITYCELL,
-    /**
-     * The cell has less neighbors than in a regular mesh
-     */
+    // The cell has less neighbors than in a regular mesh
     LOWCONNECTIVITYCELL,
-    /**
-     * Tther cells are present that refines it.
-     */
+    // Other cells are present that refine it
     REFINEDCELL,
-    /**
-     * The cell is on the exterior of the data set
-     */
+    // The cell is on the exterior of the data set
     EXTERIORCELL,
-    /**
-     * The cell is needed to maintain connectivity, but the data values should be ignored.
-     */
+    // The cell is needed to maintain connectivity, but the data values should be ignored.
     HIDDENCELL,
 }
 
 export enum PointGhostTypes {
-    /**
-     * The cell is present on multiple processors
-     */
+    // The cell is present on multiple processors
     DUPLICATEPOINT,
-    /**
-     * The point is needed to maintain connectivity, but the data values should be ignored.
-     */
+    // The point is needed to maintain connectivity, but the data values should be ignored.
     HIDDENPOINT
 }
 
@@ -62,32 +46,21 @@ export enum AttributeCopyOperations {
     COPYTUPLE,
     INTERPOLATE,
     PASSDATA,
-    /**
-     * All of the above
-     */
+    // All of the above
     ALLCOPY,
 }
 
 export const ghostArrayName: string;
 
 export enum DesiredOutputPrecision {
-    /**
-     * Use the point type that does not truncate any data
-     */
+    // Use the point type that does not truncate any data
     DEFAULT,
-    /**
-     * Use Float32Array
-     */
+    // Use Float32Array
     SINGLE,
-    /**
-     * Use Float64Array
-     */
+    // Use Float64Array
     DOUBLE,
 }
 
-/**
- *
- */
 export interface IDataSetAttributesInitialValues extends IFieldDataInitialValues {
     activeScalars?: number;
     activeVectors?: number;
@@ -101,7 +74,7 @@ export interface IDataSetAttributesInitialValues extends IFieldDataInitialValues
 export interface vtkDataSetAttributes extends vtkFieldData {
 
     /**
-     * @todo No yet Implemented
+     * @todo Not yet Implemented
      * @param x
      */
     checkNumberOfComponents(x: any): boolean;
@@ -115,6 +88,7 @@ export interface vtkDataSetAttributes extends vtkFieldData {
     /**
      * Get a list of attribute names that the given array
      * is for this vtkDataSetAttributes.
+     *
      * @param {vtkDataArray} arr
      * @returns {String[]}
      */
@@ -155,39 +129,25 @@ export interface vtkDataSetAttributes extends vtkFieldData {
      */
     getActivePedigreeIds(): number;
 
-    /**
-     * Get the scalar data.
-     */
+    // Get the scalar data
     getScalars(): vtkDataArray;
 
-    /**
-     * Get the vectors data.
-     */
+    // Get the vectors data
     getVectors(): vtkDataArray;
 
-    /**
-     * Get the normal data.
-     */
+    // Get the normals data
     getNormals(): vtkDataArray;
 
-    /**
-     * Get the texture coordinate data.
-     */
+    // Get the texture coordinate data
     getTCoords(): vtkDataArray;
 
-    /**
-     * Get the tensors data.
-     */
+    // Get the tensors data
     getTensors(): vtkDataArray;
 
-    /**
-     * Get the global id data.
-     */
+    // Get the global ID data
     getGlobalIds(): vtkDataArray;
 
-    /**
-     * Get the pedigree id data.
-     */
+    // Get the pedigree id data
     getPedigreeIds(): vtkDataArray;
 
     /**
@@ -211,21 +171,13 @@ export interface vtkDataSetAttributes extends vtkFieldData {
      */
     setActiveAttributeByIndex(arrayIdx: number, uncleanAttType: string): number;
 
-    /**
-     * Override to allow proper handling of active attributes
-     */
+    // Override to allow proper handling of active attributes
     removeAllArrays(): void;
 
-    /**
-     * Override to allow proper handling of active attributes
-     * @param {string} arrayName The name of the array.
-     */
+    // Override to allow proper handling of active attributes
     removeArray(arrayName: string): void;
 
-    /**
-     * Override to allow proper handling of active attributes
-     * @param {Number} arrayIdx The index of the array.
-     */
+    // Override to allow proper handling of active attributes
     removeArrayByIndex(arrayIdx: number): void;
 
     /**

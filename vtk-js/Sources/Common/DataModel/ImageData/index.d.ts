@@ -2,9 +2,6 @@ import { mat3, mat4, ReadonlyVec3, vec3 } from 'gl-matrix';
 import { Bounds, Extent, Vector3 } from '../../../types';
 import vtkDataSet, { IDataSetInitialValues } from '../DataSet';
 
-/**
- *
- */
 export interface IImageDataInitialValues extends IDataSetInitialValues {
     spacing?: number[];
     origin?: number[];
@@ -146,19 +143,15 @@ export interface vtkImageData extends vtkDataSet {
      */
     getOffsetIndexFromWorld(xyz: Vector3): number;
 
-    /**
-     *
-     */
     getNumberOfCells(): number;
 
-    /**
-     * Get the number of points composing the dataset.
-     */
+    // Get the number of points composing the dataset.
     getNumberOfPoints(): number;
 
     /**
      * Get the world position of a data point. Index is the point's index in the
      * 1D data array.
+     *
      * @param {Number} index
      */
     getPoint(index: number): Vector3;
@@ -173,15 +166,14 @@ export interface vtkImageData extends vtkDataSet {
      */
     getOrigin(): Vector3;
 
-    /**
-     * Get the origin of the dataset. The origin is the position in world
-     */
+    // Get the origin of the dataset. The origin is the position in world
     getOriginByReference(): Vector3;
 
     /**
      * Returns the scalar value for the point at the provided world position, or
      * `NaN` if the world bounds are outside the volumeData bounds. `comp` is
      * the scalar component index, for multi-component scalar data.
+     *
      * @param {Vector3} xyz The [x,y,z] array in world coordinates.
      * @param {Number} [comp] The scalar component index for multi-component scalars.
      * @return {number|NaN} The corresponding pixel's scalar value.
@@ -194,9 +186,6 @@ export interface vtkImageData extends vtkDataSet {
      */
     getSpacing(): Vector3;
 
-    /**
-     *
-     */
     getSpacingByReference(): Vector3;
 
     /**
@@ -215,6 +204,7 @@ export interface vtkImageData extends vtkDataSet {
 
     /**
      * this is the fast version, requires vec3 arguments
+     *
      * @param {ReadonlyVec3} vin
      * @param {vec3} [vout]
      */
@@ -224,6 +214,7 @@ export interface vtkImageData extends vtkDataSet {
      * Converts the input index vector `[i,j,k]` to world values `[x,y,z]`.
      * If an out vector is not provided, a new one is created. If provided, it
      * modifies the out vector array in place, but also returns it.
+     *
      * @param {ReadonlyVec3} ain
      * @param {vec3} [aout]
      */
@@ -235,6 +226,7 @@ export interface vtkImageData extends vtkDataSet {
      * provided, or returns a new array. Returned bounds are NOT padded based
      * on voxel spacing (see getBounds). The output is merely a bounding box
      * calculated considering voxels as grid points.
+     *
      * @param {Bounds} bin
      * @param {Bounds} [bout]
      */
@@ -242,12 +234,14 @@ export interface vtkImageData extends vtkDataSet {
 
     /**
      * Set the values of the extent, from `0` to `(i-1)`, etc.
+     *
      * @param dims
      */
     setDimensions(dims: number[]): void;
 
     /**
      * Set the values of the extent, from `0` to `(i-1)`, etc.
+     *
      * @param {Number} i
      * @param {Number} j
      * @param {Number} k
@@ -260,6 +254,7 @@ export interface vtkImageData extends vtkDataSet {
      * axes directions in world coordinates. Direction must
      * form an orthonormal basis, results are undefined if
      * it is not.
+     *
      * @param {mat3} direction
      */
     setDirection(direction: mat3): boolean;
@@ -270,6 +265,7 @@ export interface vtkImageData extends vtkDataSet {
      * axes directions in world coordinates. Direction must
      * form an orthonormal basis, results are undefined if
      * it is not.
+     *
      * @param e00
      * @param e01
      * @param e02
@@ -284,6 +280,7 @@ export interface vtkImageData extends vtkDataSet {
 
     /**
      * Set the extent.
+     *
      * @param {Extent} extent
      */
     setExtent(extent: Extent): boolean;
@@ -301,30 +298,25 @@ export interface vtkImageData extends vtkDataSet {
 
     /**
      * Set the origin of the image.
+     *
      * @param {Vector3} origin The coordinate of the origin point.
      */
     setOrigin(origin: Vector3): boolean;
 
     /**
      * Set the origin of the image.
+     *
      * @param {Vector3} origin The coordinate of the origin point.
      */
     setOriginFrom(origin: Vector3): boolean;
 
-    /**
-     *
-     * @param spacing
-     */
     setSpacing(spacing: number[]): boolean;
 
-    /**
-     *
-     * @param spacing
-     */
     setSpacingFrom(spacing: number[]): boolean;
 
     /**
      * this is the fast version, requires vec3 arguments
+     *
      * @param vin
      * @param [vout]
      */
@@ -335,6 +327,7 @@ export interface vtkImageData extends vtkDataSet {
      * `[i,j,k]`. Should be rounded to integers before attempting to access the
      * index. If an out vector is not provided, a new one is created. If provided, it
      * modifies the out vector array in place, but also returns it.
+     *
      * @param ain
      * @param [aout]
      */
@@ -344,6 +337,7 @@ export interface vtkImageData extends vtkDataSet {
      * Calculate the corresponding index bounds for the given world bounds
      * `[x_min, x_max, y_min, y_max, z_min, z_max]`. Modifies `out` in place if
      * provided, or returns a new array.
+     *
      * @param {Bounds} bin
      * @param {Bounds} [bout]
      */
@@ -361,6 +355,7 @@ export function extend(publicAPI: object, model: object, initialValues?: IImageD
 
 /**
  * Method used to create a new instance of vtkImageData.
+ * 
  * @param {IImageDataInitialValues} [initialValues] for pre-setting some of its content
  */
 export function newInstance(initialValues?: IImageDataInitialValues): vtkImageData;

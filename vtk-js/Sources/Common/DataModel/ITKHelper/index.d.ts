@@ -14,6 +14,7 @@ export interface IOptions {
 /**
  * Converts an itk-wasm Image to a vtk.js vtkImageData.
  * Requires an itk-wasm Image as input.
+ *
  * @param itkImage
  * @param {IOptions} [options]
  */
@@ -22,6 +23,7 @@ export function convertItkToVtkImage(itkImage: any, options?: IOptions): vtkImag
 /**
  * Converts a vtk.js vtkImageData to an itk-wasm Image.
  * Requires a vtk.js vtkImageData as input.
+ * 
  * @param {vtkImageData} vtkImage
  * @param {IOptions} [options]
  */

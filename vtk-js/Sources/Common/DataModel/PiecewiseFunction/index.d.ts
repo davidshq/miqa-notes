@@ -11,6 +11,7 @@ export interface vtkPiecewiseFunction extends vtkObject {
 
     /**
      * Add points to the function.
+     *
      * @param {Number} x The x coordinate.
      * @param {Number} y The y coordinate.
      */
@@ -18,6 +19,7 @@ export interface vtkPiecewiseFunction extends vtkObject {
 
     /**
      * Add points to the function.
+     *
      * @param {Number} x The x coordinate.
      * @param {Number} y The y coordinate.
      * @param {Number} midpoint
@@ -27,6 +29,7 @@ export interface vtkPiecewiseFunction extends vtkObject {
 
     /**
      * Add a line segment to the function.
+     *
      * @param {Number} x1 The first point x coordinate.
      * @param {Number} y1 The first point y coordinate.
      * @param {Number} x2 The second point x coordinate.
@@ -37,6 +40,7 @@ export interface vtkPiecewiseFunction extends vtkObject {
     /**
      * Remove all points out of the new range, and make sure there is a point at
      * each end of that range.
+     *
      * @param {Range} range
      */
     adjustRange(range: Range): number;
@@ -47,9 +51,7 @@ export interface vtkPiecewiseFunction extends vtkObject {
      */
     estimateMinNumberOfSamples(): number;
 
-    /**
-     * Traverses the nodes to find the minimum distance.
-     */
+    // Traverses the nodes to find the minimum distance.
     findMinimumXDistance(): number;
 
     /**
@@ -69,9 +71,7 @@ export interface vtkPiecewiseFunction extends vtkObject {
      */
     getClamping(): boolean;
 
-    /**
-     * Returns a pointer to the data stored in the table.
-     */
+    // Returns a pointer to the data stored in the table.
     getDataPointer(): any[];
 
     /**
@@ -83,28 +83,24 @@ export interface vtkPiecewiseFunction extends vtkObject {
     /**
      * For the node specified by index, set/get the location (X), value (Y),
      * midpoint, and sharpness values at the node.
+     *
      * @param {Number} index
      * @param val
      */
     getNodeValue(index: number, val: any[]): void;
 
-    /**
-     * Returns the min and max node locations of the function.
-     */
+    // Returns the min and max node locations of the function.
     getRange(): Range;
 
-    /**
-     * Returns the min and max node locations of the function.
-     */
+    // Returns the min and max node locations of the function.
     getRangeByReference(): Range;
 
-    /**
-     * Get the number of points used to specify the function.
-     */
+    // Get the number of points used to specify the function.
     getSize(): number;
 
     /**
      * Fills in an array of function values evaluated at regular intervals.
+     *
      * @param {Number} xStart
      * @param {Number} xEnd
      * @param {Number} size
@@ -128,22 +124,17 @@ export interface vtkPiecewiseFunction extends vtkObject {
      */
     getValue(): any;
 
-    /**
-     * Removes all points from the function.
-     */
+    // Removes all points from the function.
     removeAllPoints(): void;
 
     /**
      * Remove the first point found at the given x location Return the index of
      * the remove point if any, -1 otherwise.
+     *
      * @param {Number} x
      */
     removePoint(x: number): number;
 
-    /**
-     *
-     * @param {Boolean} allowDuplicateScalars
-     */
     setAllowDuplicateScalars(allowDuplicateScalars: boolean): boolean;
 
     /**
@@ -154,40 +145,19 @@ export interface vtkPiecewiseFunction extends vtkObject {
      * at the lowest point for a request below all points specified and returns
      * the value at the highest point for a request above all points specified.
      * On is the default.
+     *
      * @param {Boolean} clamping
      */
     setClamping(clamping: boolean): boolean;
 
-    /**
-     *
-     * @param {Number} index
-     * @param val
-     */
     setNodeValue(index: number, val: any[]): number;
 
-    /**
-     *
-     * @param nodes
-     */
     setNodes(nodes: any[]): void;
 
-    /**
-     *
-     * @param {Range} range
-     */
     setRange(range: Range): boolean;
 
-    /**
-     *
-     * @param {Number} min
-     * @param {Number} max
-     */
     setRange(min: number, max: number): boolean;
 
-    /**
-     *
-     * @param {Range} range
-     */
     setRangeFrom(range: Range): boolean;
 
     /**
@@ -214,13 +184,15 @@ export function extend(publicAPI: object, model: object, initialValues?: IPiecew
 
 /**
  * Method used to create a new instance of vtkPiecewiseFunction.
+ *
  * @param {IPiecewiseFunctionInitialValues} [initialValues] for pre-setting some of its content
  */
 export function newInstance(initialValues?: IPiecewiseFunctionInitialValues): vtkPiecewiseFunction;
 
 /**
- * vtkPiecewiseFunction Defines a piecewise function mapping. This mapping
- * allows the addition of control points, and allows the user to control the
+ * vtkPiecewiseFunction Defines a piecewise function mapping.
+ *
+ * This mapping allows the addition of control points, and allows the user to control the
  * function between the control points. A piecewise hermite curve is used
  * between control points, based on the sharpness and midpoint parameters. A
  * sharpness of 0 yields a piecewise linear function and a sharpness of 1 yields

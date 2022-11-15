@@ -8,10 +8,12 @@ import { vec3, mat3, mat4 } from 'gl-matrix';
 
 const { vtkErrorMacro } = macro;
 
-// ----------------------------------------------------------------------------
-// vtkImageData methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkImageData Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 function vtkImageData(publicAPI, model) {
     // Set our className
     model.classHierarchy.push('vtkImageData');
@@ -478,7 +480,5 @@ export function extend(publicAPI, model, initialValues = {}) {
 // ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkImageData');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend };

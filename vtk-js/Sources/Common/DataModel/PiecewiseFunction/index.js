@@ -2,10 +2,12 @@ import macro from '../../../macros';
 
 const { vtkErrorMacro } = macro;
 
-// ----------------------------------------------------------------------------
-// vtkPiecewiseFunction methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkPiecewiseFunction Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 function vtkPiecewiseFunction(publicAPI, model) {
     // Set our className
     model.classHierarchy.push('vtkPiecewiseFunction');
@@ -593,7 +595,5 @@ export function extend(publicAPI, model, initialValues = {}) {
 // ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkPiecewiseFunction');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend };
