@@ -1,5 +1,5 @@
 import macro from '../../../macros';
-import ITKHelper from 'vtk.js/Sources/Common/DataModel/ITKHelper';
+import ITKHelper from '../../../Common/DataModel/ITKHelper';
 
 const { convertItkToVtkImage } = ITKHelper;
 let readImageArrayBuffer = null;

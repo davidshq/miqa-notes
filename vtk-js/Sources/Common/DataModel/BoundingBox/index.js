@@ -1,5 +1,5 @@
-import * as vtkMath from 'vtk.js/Sources/Common/Core/Math';
-import vtkPlane from 'vtk.js/Sources/Common/DataModel/Plane';
+// import * as vtkMath from 'vtk.js/Sources/Common/Core/Math';
+import vtkPlane from '../../../Common/DataModel/Plane';
 
 const INIT_BOUNDS = [
     Number.MAX_VALUE,
@@ -533,8 +533,11 @@ export function contains(bounds, otherBounds) {
 /**
  * Returns true if plane intersects bounding box.
  * If so, the box is cut by the plane
- * @param {array} origin
- * @param {array} normal
+ *
+ * @param bounds
+ * @param origin
+ * @param normal
+ * @returns {boolean}
  */
 export function cutWithPlane(bounds, origin, normal) {
     // Index[0..2] represents the order of traversing the corners of a cube

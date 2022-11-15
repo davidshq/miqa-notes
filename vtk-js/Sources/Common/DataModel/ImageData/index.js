@@ -1,9 +1,9 @@
 import macro from '../../../macros';
-import * as vtkMath from 'vtk.js/Sources/Common/Core/Math';
+// import * as vtkMath from 'vtk.js/Sources/Common/Core/Math';
 import vtkBoundingBox from '../../../Common/DataModel/BoundingBox';
-import vtkDataSet from 'vtk.js/Sources/Common/DataModel/DataSet';
-import vtkStructuredData from 'vtk.js/Sources/Common/DataModel/StructuredData';
-import { StructuredType } from 'vtk.js/Sources/Common/DataModel/StructuredData/Constants';
+import vtkDataSet from '../../../Common/DataModel/DataSet';
+import vtkStructuredData from '../../../Common/DataModel/StructuredData';
+import { StructuredType } from '../StructuredData/Constants';
 import { vec3, mat3, mat4 } from 'gl-matrix';
 
 const { vtkErrorMacro } = macro;
