@@ -1,30 +1,30 @@
-import macro from 'vtk.js/Sources/macros';
+import macro from '../../../macros';
 
 /**
- * 
- * @param {*} publicAPI 
- * @param {*} model 
+ *
+ * @param {*} publicAPI
+ * @param {*} model
  */
 export default function addViewHandlingAPI(publicAPI, model) {
   /**
-   * 
-   * @param {*} options 
-   * @returns 
+   *
+   * @param {*} options
+   * @returns
    */
   publicAPI.create3DView = (options) =>
     publicAPI.createProxy('Views', 'View3D', options);
 
   /**
-   * 
-   * @param {*} options 
-   * @returns 
+   *
+   * @param {*} options
+   * @returns
    */
   publicAPI.create2DView = (options) =>
     publicAPI.createProxy('Views', 'View2D', options);
 
   /**
-   * 
-   * @param {*} view 
+   *
+   * @param {*} view
    */
   publicAPI.render = (view) => {
     const viewToRender = view || publicAPI.getActiveView();
@@ -34,8 +34,8 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
-   * @param {*} blocking 
+   *
+   * @param {*} blocking
    */
   publicAPI.renderAllViews = (blocking = false) => {
     const allViews = publicAPI.getViews();
@@ -45,8 +45,8 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
-   * @param {*} enable 
+   *
+   * @param {*} enable
    */
   publicAPI.setAnimationOnAllViews = (enable = false) => {
     const allViews = publicAPI
@@ -58,7 +58,7 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
+   *
    */
   function clearAnimations() {
     model.animating = false;
@@ -69,8 +69,8 @@ export default function addViewHandlingAPI(publicAPI, model) {
   }
 
   /**
-   * 
-   * @param {*} debouceTimout 
+   *
+   * @param {*} debouceTimout
    */
   publicAPI.autoAnimateViews = (debouceTimout = 250) => {
     if (!model.animating) {
@@ -85,7 +85,7 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
+   *
    */
   publicAPI.resizeAllViews = () => {
     const allViews = publicAPI.getViews();
@@ -95,8 +95,8 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
-   * @param {*} view 
+   *
+   * @param {*} view
    */
   publicAPI.resetCamera = (view) => {
     const viewToRender = view || publicAPI.getActiveView();
@@ -106,8 +106,8 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
-   * @param {*} source 
+   *
+   * @param {*} source
    */
   publicAPI.createRepresentationInAllViews = (source) => {
     const allViews = publicAPI.getViews();
@@ -117,7 +117,7 @@ export default function addViewHandlingAPI(publicAPI, model) {
   };
 
   /**
-   * 
+   *
    */
   publicAPI.resetCameraInAllViews = () => {
     const allViews = publicAPI.getViews();
