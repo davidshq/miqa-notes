@@ -1,0 +1,76 @@
+# Stand Alone
+- `INIT_BOUNDS`
+- `equals(a, b)`
+- `isValid(bounds)`
+- `setBounds(bounds, otherBounds)`
+- `reset(bounds)`
+- `addPoint(bounds, x, y, z)`
+- `addPoints(bounds, points)`
+- `addBounds(bounds, xMin, xMax, yMin, yMax, zMin, zMax)`
+- `setMinPoint(bounds, x, y, z)`
+- `setMaxPoint(bounds, x, y, z)`
+- `inflate(bounds, delta)`
+- `scale(bounds, sx, sy, sz)`
+- `getCenter(bounds)`
+- `scaleAboutCenter(bounds, sx, sy, sz)`
+- `getLength(bounds, index)`
+- `getLengths(bounds)`
+- `getXRange(bounds)`
+- `getYRange(bounds)`
+- `getZRange(bounds)`
+- `getMaxLength(bounds)`
+- `getDiagonalLength(bounds)`
+- `getMinPoint(bounds)`
+- `getMaxPoint(bounds)`
+- `oppositeSign(a, b)`
+- `getCorners(bounds, corners)`
+- `computeCornerPointerws(bounds, point1, point2)`
+- `computeScale3(bounds, scale3 = [])`
+- `computeLocalBounds(points, u, v, w)`
+- `intersectBox(bounds, origin, dir, coord, tolerance)`
+- `intersectPlane(bounds, origin, normal)`
+- `intersect(bounds, bBounds)`
+- `intersects(bounds, bBounds)`
+- `containsPoint(bounds, x, y, z)`
+- `contains(bounds, otherBounds)`
+- `cutWithPlane(bounds, origin, normal)`
+
+# Class: BoundingBox
+- `constructor(refBounds)`
+- `getBounds()`
+- `equals(otherBounds)`
+- `isValid()`
+- `setBounds(otherBounds)`
+- `reset()`
+- `addPoint(...xyz)`
+- `addPoints(points)`
+- `addBounds(xMin, xMax, yMIn, yMax, zMin, zMax)`
+- `setMinPoint(x, y, z)`
+- `setMaxPoint(x, y, z)`
+- `inflate(delta)`
+- `scale(sx, sy, sz)`
+- `getCenter()`
+- `getLength(index)`
+- `getLengths()`
+- `getMaxLength()`
+- `getDiagonalLength()`
+- `getMinPoint()`
+- `getMaxPoint()`
+- `getXRange()`
+- `getYRange()`
+- `getZRange()`
+- `getCorners(corners)`
+- `computeCornerPoints(point1, point2)`
+- `computeLocalBounds(u, v, w)`
+- `computeScale3(scale3)`
+- `cutWithPlane(origin, normal)`
+- `intersectBox(origin, normal)`
+- `intersectPlane(origin, normal)`
+- `intersect(otherBounds)`
+- `intersects(otherBounds)`
+- `containsPoint(x, y, z)`
+- `contains(otherBounds)`
+
+# Stand Alone
+- `newInstance(initialValues)`
+- `STATIC`

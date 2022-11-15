@@ -275,8 +275,10 @@ export function computeScale3(bounds, scale3 = []) {
 }
 
 /**
- * Compute local bounds.
+ * Computes local bounds.
+ *
  * Not as fast as vtkPoints.getBounds() if u, v, w form a natural basis.
+ *
  * @param {vtkPoints} points
  * @param {array} u first vector
  * @param {array} v second vector
@@ -300,11 +302,21 @@ export function computeLocalBounds(points, u, v, w) {
     return bounds;
 }
 
-// The method returns a non-zero value if the bounding box is hit.
-// Origin[3] starts the ray, dir[3] is the vector components of the ray in the x-y-z
-// directions, coord[3] is the location of hit, and t is the parametric
-// coordinate along line. (Notes: the intersection ray dir[3] is NOT
-// normalized.  Valid intersections will only occur between 0<=t<=1.)
+/**
+ * The method returns a non-zero value if the bounding box is hit.
+ *
+ * Origin[3] starts the ray, dir[3] is the vector components of the ray in the x-y-z
+ * directions, coord[3] is the location of hit, and t is the parametric
+ * coordinate along line. (Notes: the intersection ray dir[3] is NOT
+ * normalized.  Valid intersections will only occur between 0<=t<=1.)
+ *
+ * @param {*} bounds
+ * @param {*} origin
+ * @param {*} dir
+ * @param {*} coord
+ * @param {*} tolerance
+ * @returns
+ */
 export function intersectBox(bounds, origin, dir, coord, tolerance) {
     let inside = true;
     const quadrant = [];
@@ -377,10 +389,19 @@ export function intersectBox(bounds, origin, dir, coord, tolerance) {
     return 1;
 }
 
-// Plane intersection with box
-// The plane is infinite in extent and defined by an origin and normal.The function indicates
-// whether the plane intersects, not the particulars of intersection points and such
-// The function returns non-zero if the plane and box intersect; zero otherwise.
+/**
+ * Plane intersection with box
+ *
+ * The plane is infinite in extent and defined by an origin and normal. The function indicates
+ * whether the plane intersects, not the particulars of intersection points and such
+ *
+ * The function returns non-zero if the plane and box intersect; zero otherwise.
+ *
+ * @param {*} bounds
+ * @param {*} origin
+ * @param {*} normal
+ * @returns
+ */
 export function intersectPlane(bounds, origin, normal) {
     const p = [];
     let d = 0;
