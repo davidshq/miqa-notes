@@ -5,24 +5,24 @@
  import DeepEqual from 'deep-equal';
  import vtk, { vtkGlobal } from './vtk';
  import ClassHierarchy from './Common/Core/ClassHierarchy';
- 
+
  let globalMTime = 0;
- 
+
  export const VOID = Symbol('void');
- 
+
  function getCurrentGlobalMTime() {
    return globalMTime;
  }
- 
+
  // ----------------------------------------------------------------------------
  // Logging function calls
  // ----------------------------------------------------------------------------
  /* eslint-disable no-prototype-builtins                                      */
- 
+
  const fakeConsole = {};
- 
+
  function noOp() {}
- 
+
  const consoleMethods = [
    'log',
    'debug',
@@ -37,9 +37,9 @@
  consoleMethods.forEach((methodName) => {
    fakeConsole[methodName] = noOp;
  });
- 
+
  vtkGlobal.console = console.hasOwnProperty('log') ? console : fakeConsole;
- 
+
  const loggerFunctions = {
    debug: noOp, // Don't print debug by default
    error: vtkGlobal.console.error || noOp,
@@ -47,46 +47,43 @@
    log: vtkGlobal.console.log || noOp,
    warn: vtkGlobal.console.warn || noOp,
  };
- 
+
  export function setLoggerFunction(name, fn) {
    if (loggerFunctions[name]) {
      loggerFunctions[name] = fn || noOp;
    }
  }
- 
+
  export function vtkLogMacro(...args) {
    loggerFunctions.log(...args);
  }
- 
+
  export function vtkInfoMacro(...args) {
    loggerFunctions.info(...args);
  }
- 
+
  export function vtkDebugMacro(...args) {
    loggerFunctions.debug(...args);
  }
- 
+
  export function vtkErrorMacro(...args) {
    loggerFunctions.error(...args);
  }
- 
+
  export function vtkWarningMacro(...args) {
    loggerFunctions.warn(...args);
  }
- 
+
  const ERROR_ONCE_MAP = {};
- 
+
  export function vtkOnceErrorMacro(str) {
    if (!ERROR_ONCE_MAP[str]) {
      loggerFunctions.error(str);
      ERROR_ONCE_MAP[str] = true;
    }
  }
- 
- // ----------------------------------------------------------------------------
- // TypedArray
- // ----------------------------------------------------------------------------
- 
+
+ // Typed_Array
  export const TYPED_ARRAYS = Object.create(null);
  TYPED_ARRAYS.Float32Array = Float32Array;
  TYPED_ARRAYS.Float64Array = Float64Array;
@@ -99,40 +96,29 @@
  TYPED_ARRAYS.Uint8ClampedArray = Uint8ClampedArray;
  // TYPED_ARRAYS.BigInt64Array = BigInt64Array;
  // TYPED_ARRAYS.BigUint64Array = BigUint64Array;
- 
+
  export function newTypedArray(type, ...args) {
    return new (TYPED_ARRAYS[type] || Float64Array)(...args);
  }
- 
+
  export function newTypedArrayFrom(type, ...args) {
    return (TYPED_ARRAYS[type] || Float64Array).from(...args);
  }
- 
- // ----------------------------------------------------------------------------
- // capitilize provided string
- // ----------------------------------------------------------------------------
- 
+
+ // Capitalize provided string
  export function capitalize(str) {
    return str.charAt(0).toUpperCase() + str.slice(1);
  }
- 
+
  export function _capitalize(str) {
    return capitalize(str[0] === '_' ? str.slice(1) : str);
  }
- 
+
  export function uncapitalize(str) {
    return str.charAt(0).toLowerCase() + str.slice(1);
  }
- 
- 
- /**
-  * Convert byte size into a well formatted string
-  * 
-  * @param {*} size 
-  * @param {*} precision 
-  * @param {*} chunkSize 
-  * @returns 
-  */
+
+ // Convert byte size into a well formatted string
  export function formatBytesToProperUnit(size, precision = 2, chunkSize = 1000) {
    const units = ['TB', 'GB', 'MB', 'KB'];
    let value = Number(size);
@@ -143,14 +129,8 @@
    }
    return `${value.toFixed(precision)} ${currentUnit}`;
  }
- 
- /**
-  * Convert thousand number with proper separator
-  * 
-  * @param {*} n 
-  * @param {*} separator 
-  * @returns 
-  */
+
+ // Convert thousand number with proper separator
  export function formatNumbersWithThousandSeparator(n, separator = ' ') {
    const sections = [];
    let size = n;
@@ -164,12 +144,8 @@
    sections.reverse();
    return sections.join(separator);
  }
- 
- /**
-  * Array helper
-  * 
-  * @param {*} model 
-  */
+
+ // Array helper
  function safeArrays(model) {
    Object.keys(model).forEach((key) => {
      if (Array.isArray(model[key])) {
@@ -177,19 +153,13 @@
      }
    });
  }
- 
- /**
-  * shallow equals
-  * 
-  * @param {*} a 
-  * @param {*} b 
-  * @returns 
-  */
+
+ // Shallow equals
  function shallowEquals(a, b) {
    if (a === b) {
      return true;
    }
- 
+
    if (Array.isArray(a) && Array.isArray(b)) {
      if (a.length !== b.length) {
        return false;
@@ -201,49 +171,34 @@
      }
      return true;
    }
- 
+
    return false;
  }
- 
- /**
-  * 
-  * @param {*} e 
-  * @param {*} value 
-  * @returns 
-  */
+
  function enumToString(e, value) {
    return Object.keys(e).find((key) => e[key] === value);
  }
- 
- /**
-  * 
-  * @param {*} item 
-  * @returns 
-  */
+
  function getStateArrayMapFunc(item) {
    if (item && item.isA) {
      return item.getState();
    }
    return item;
  }
- 
- /**
-  * setImmediate
-  * 
-  * @param {*} fn 
-  */
+
+ // setImmediate
  export function setImmediateVTK(fn) {
    setTimeout(fn, 0);
  }
- 
+
  /**
   * Measures the time it takes for a promise to finish from the time this function
   * is invoked.
-  * 
+  *
   * The callback receives the time it took for the promise to resolve or reject.
-  * 
-  * @param {*} promise 
-  * @param {*} callback 
+  *
+  * @param {*} promise
+  * @param {*} callback
   */
  export function measurePromiseExecution(promise, callback) {
    const start = performance.now();
@@ -252,23 +207,23 @@
      callback(delta);
    });
  }
- 
+
  /**
   * vtkObject: modified(), onModified(callback), delete()
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @returns 
+  *
+  * @param {*} publicAPI
+  * @param {*} model
+  * @returns
   */
  export function obj(publicAPI = {}, model = {}) {
    // Ensure each instance as a unique ref of array
    safeArrays(model);
- 
+
    const callbacks = [];
    if (!Number.isInteger(model.mtime)) {
      model.mtime = ++globalMTime;
    }
- 
+
    if (!('classHierarchy' in model)) {
      model.classHierarchy = new ClassHierarchy('vtkObject');
    } else if (!(model.classHierarchy instanceof ClassHierarchy)) {
@@ -278,50 +233,50 @@
      }
      model.classHierarchy = hierarchy;
    }
- 
+
    function off(index) {
      callbacks[index] = null;
    }
- 
+
    function on(index) {
      function unsubscribe() {
        off(index);
      }
- 
+
      return Object.freeze({
        unsubscribe,
      });
    }
- 
+
    publicAPI.isDeleted = () => !!model.deleted;
- 
+
    publicAPI.modified = (otherMTime) => {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
        return;
      }
- 
+
      if (otherMTime && otherMTime < publicAPI.getMTime()) {
        return;
      }
- 
+
      model.mtime = ++globalMTime;
      callbacks.forEach((callback) => callback && callback(publicAPI));
    };
- 
+
    publicAPI.onModified = (callback) => {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
        return null;
      }
- 
+
      const index = callbacks.length;
      callbacks.push(callback);
      return on(index);
    };
- 
+
    publicAPI.getMTime = () => model.mtime;
- 
+
    publicAPI.isA = (className) => {
      let count = model.classHierarchy.length;
      // we go backwards as that is more likely for
@@ -333,10 +288,10 @@
      }
      return false;
    };
- 
+
    publicAPI.getClassName = (depth = 0) =>
      model.classHierarchy[model.classHierarchy.length - 1 - depth];
- 
+
    publicAPI.set = (map = {}, noWarning = false, noFunction = false) => {
      let ret = false;
      Object.keys(map).forEach((name) => {
@@ -358,7 +313,7 @@
      });
      return ret;
    };
- 
+
    publicAPI.get = (...list) => {
      if (!list.length) {
        return model;
@@ -369,24 +324,24 @@
      });
      return subset;
    };
- 
+
    publicAPI.getReferenceByName = (val) => model[val];
- 
+
    publicAPI.delete = () => {
      Object.keys(model).forEach((field) => delete model[field]);
      callbacks.forEach((el, index) => off(index));
- 
+
      // Flag the instance being deleted
      model.deleted = true;
    };
- 
+
    // Add serialization support
    publicAPI.getState = () => {
      if (model.deleted) {
        return null;
      }
      const jsonArchive = { ...model, vtkClass: publicAPI.getClassName() };
- 
+
      // Convert every vtkObject to its serializable form
      Object.keys(jsonArchive).forEach((keyName) => {
        if (
@@ -401,7 +356,7 @@
          jsonArchive[keyName] = jsonArchive[keyName].map(getStateArrayMapFunc);
        }
      });
- 
+
      // Sort resulting object by key name
      const sortedObj = {};
      Object.keys(jsonArchive)
@@ -409,15 +364,15 @@
        .forEach((name) => {
          sortedObj[name] = jsonArchive[name];
        });
- 
+
      // Remove mtime
      if (sortedObj.mtime) {
        delete sortedObj.mtime;
      }
- 
+
      return sortedObj;
    };
- 
+
    // Add shallowCopy(otherInstance) support
    publicAPI.shallowCopy = (other, debug = false) => {
      if (other.getClassName() !== publicAPI.getClassName()) {
@@ -426,10 +381,10 @@
        );
      }
      const otherModel = other.get();
- 
+
      const keyList = Object.keys(model).sort();
      const otherKeyList = Object.keys(otherModel).sort();
- 
+
      otherKeyList.forEach((key) => {
        const keyIdx = keyList.indexOf(key);
        if (keyIdx === -1) {
@@ -444,24 +399,24 @@
      if (keyList.length && debug) {
        vtkDebugMacro(`Untouched keys: ${keyList.join(', ')}`);
      }
- 
+
      publicAPI.modified();
    };
- 
+
    // This function will get called when one invoke JSON.stringify(vtkObject)
    // JSON.stringify will only stringify the return value of this function
    publicAPI.toJSON = function vtkObjToJSON() {
      return publicAPI.getState();
    };
- 
+
    // Allow usage as decorator
    return publicAPI;
  }
- 
+
  // ----------------------------------------------------------------------------
  // getXXX: add getters
  // ----------------------------------------------------------------------------
- 
+
  const objectGetterMap = {
    object(publicAPI, model, field) {
      return function getter() {
@@ -469,7 +424,7 @@
      };
    },
  };
- 
+
  export function get(publicAPI, model, fieldNames) {
    fieldNames.forEach((field) => {
      if (typeof field === 'object') {
@@ -488,11 +443,11 @@
      }
    });
  }
- 
+
  // ----------------------------------------------------------------------------
  // setXXX: add setters
  // ----------------------------------------------------------------------------
- 
+
  const objectSetterMap = {
    enum(publicAPI, model, field) {
      return (value) => {
@@ -541,19 +496,14 @@
      };
    },
  };
- 
- /**
-  * 
-  * @param {*} field 
-  * @returns 
-  */
+
  function findSetter(field) {
    if (typeof field === 'object') {
      const fn = objectSetterMap[field.type];
      if (fn) {
        return (publicAPI, model) => fn(publicAPI, model, field);
      }
- 
+
      vtkErrorMacro(`No setter for field ${field}`);
      throw new TypeError('No setter for field');
    }
@@ -563,7 +513,7 @@
          vtkErrorMacro('instance deleted - cannot call any method');
          return false;
        }
- 
+
        if (model[field] !== value) {
          model[field] = value;
          publicAPI.modified();
@@ -573,13 +523,7 @@
      };
    };
  }
- 
- /**
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} fields 
-  */
+
  export function set(publicAPI, model, fields) {
    fields.forEach((field) => {
      if (typeof field === 'object') {
@@ -595,24 +539,15 @@
      }
    });
  }
- 
- /**
-  * set/get XXX: add both setters and getters
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} fieldNames 
-  */
+
+ // set/get XXX: add both setters and getters
  export function setGet(publicAPI, model, fieldNames) {
    get(publicAPI, model, fieldNames);
    set(publicAPI, model, fieldNames);
  }
- 
- // ----------------------------------------------------------------------------
+
  // getXXX: add getters for object of type array with copy to be safe
  // getXXXByReference: add getters for object of type array without copy
- // ----------------------------------------------------------------------------
- 
  export function getArray(publicAPI, model, fieldNames) {
    fieldNames.forEach((field) => {
      publicAPI[`get${_capitalize(field)}`] = () =>
@@ -620,13 +555,10 @@
      publicAPI[`get${_capitalize(field)}ByReference`] = () => model[field];
    });
  }
- 
- // ----------------------------------------------------------------------------
+
  // setXXX: add setter for object of type array
  // if 'defaultVal' is supplied, shorter arrays will be padded to 'size' with 'defaultVal'
  // set...From: fast path to copy the content of an array to the current one without call to modified.
- // ----------------------------------------------------------------------------
- 
  export function setArray(
    publicAPI,
    model,
@@ -640,13 +572,13 @@
          `Invalid initial number of values for array (${field})`
        );
      }
- 
+
      publicAPI[`set${_capitalize(field)}`] = (...args) => {
        if (model.deleted) {
          vtkErrorMacro('instance deleted - cannot call any method');
          return false;
        }
- 
+
        let array = args;
        let changeDetected;
        let needCopy = false;
@@ -680,14 +612,14 @@
            array = Array.from(array);
          }
        }
- 
+
        if (changeDetected) {
          model[field] = array;
          publicAPI.modified();
        }
        return changeDetected;
      };
- 
+
      publicAPI[`set${_capitalize(field)}From`] = (otherArray) => {
        const target = model[field];
        otherArray.forEach((v, i) => {
@@ -696,16 +628,8 @@
      };
    });
  }
- 
- /**
-  * set/get XXX: add setter and getter for object of type array
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} fieldNames 
-  * @param {*} size 
-  * @param {*} defaultVal 
-  */
+
+ // set/get XXX: add setter and getter for object of type array
  export function setGetArray(
    publicAPI,
    model,
@@ -716,7 +640,7 @@
    getArray(publicAPI, model, fieldNames);
    setArray(publicAPI, model, fieldNames, size, defaultVal);
  }
- 
+
  export function moveToProtected(publicAPI, model, fieldNames) {
    for (let i = 0; i < fieldNames.length; i++) {
      const fieldName = fieldNames[i];
@@ -726,14 +650,9 @@
      }
    }
  }
- 
+
  /**
   * vtkAlgorithm: setInputData(), setInputConnection(), getOutputData(), getOutputPort()
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} numberOfInputs 
-  * @param {*} numberOfOutputs 
   */
  export function algo(publicAPI, model, numberOfInputs, numberOfOutputs) {
    if (model.inputData) {
@@ -741,28 +660,28 @@
    } else {
      model.inputData = [];
    }
- 
+
    if (model.inputConnection) {
      model.inputConnection = model.inputConnection.map(vtk);
    } else {
      model.inputConnection = [];
    }
- 
+
    if (model.output) {
      model.output = model.output.map(vtk);
    } else {
      model.output = [];
    }
- 
+
    if (model.inputArrayToProcess) {
      model.inputArrayToProcess = model.inputArrayToProcess.map(vtk);
    } else {
      model.inputArrayToProcess = [];
    }
- 
+
    // Cache the argument for later manipulation
    model.numberOfInputs = numberOfInputs;
- 
+
    // Methods
    function setInputData(dataset, port = 0) {
      if (model.deleted) {
@@ -785,14 +704,14 @@
        }
      }
    }
- 
+
    function getInputData(port = 0) {
      if (model.inputConnection[port]) {
        model.inputData[port] = model.inputConnection[port]();
      }
      return model.inputData[port];
    }
- 
+
    function setInputConnection(outputPort, port = 0) {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
@@ -808,11 +727,11 @@
      model.inputData[port] = null;
      model.inputConnection[port] = outputPort;
    }
- 
+
    function getInputConnection(port = 0) {
      return model.inputConnection[port];
    }
- 
+
    function getPortToFill() {
      let portToFill = model.numberOfInputs;
      while (
@@ -827,7 +746,7 @@
      }
      return portToFill;
    }
- 
+
    function addInputConnection(outputPort) {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
@@ -835,7 +754,7 @@
      }
      setInputConnection(outputPort, getPortToFill());
    }
- 
+
    function addInputData(dataset) {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
@@ -843,7 +762,7 @@
      }
      setInputData(dataset, getPortToFill());
    }
- 
+
    function getOutputData(port = 0) {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
@@ -854,11 +773,11 @@
      }
      return model.output[port];
    }
- 
+
    publicAPI.shouldUpdate = () => {
      const localMTime = publicAPI.getMTime();
      let minOutputMTime = Infinity;
- 
+
      let count = numberOfOutputs;
      while (count--) {
        if (!model.output[count] || model.output[count].isDeleted()) {
@@ -872,7 +791,7 @@
          minOutputMTime = mt;
        }
      }
- 
+
      count = model.numberOfInputs;
      while (count--) {
        if (
@@ -882,17 +801,17 @@
          return true;
        }
      }
- 
+
      return false;
    };
- 
+
    function getOutputPort(port = 0) {
      const outputPortAccess = () => getOutputData(port);
      // Add reference to filter
      outputPortAccess.filter = publicAPI;
      return outputPortAccess;
    }
- 
+
    // Handle input if needed
    if (model.numberOfInputs) {
      // Reserve inputs
@@ -901,7 +820,7 @@
        model.inputData.push(null);
        model.inputConnection.push(null);
      }
- 
+
      // Expose public methods
      publicAPI.setInputData = setInputData;
      publicAPI.setInputConnection = setInputConnection;
@@ -910,12 +829,12 @@
      publicAPI.getInputData = getInputData;
      publicAPI.getInputConnection = getInputConnection;
    }
- 
+
    if (numberOfOutputs) {
      publicAPI.getOutputData = getOutputData;
      publicAPI.getOutputPort = getOutputPort;
    }
- 
+
    publicAPI.update = () => {
      const ins = [];
      if (model.numberOfInputs) {
@@ -929,11 +848,11 @@
        publicAPI.requestData(ins, model.output);
      }
    };
- 
+
    publicAPI.getNumberOfInputPorts = () => model.numberOfInputs;
    publicAPI.getNumberOfOutputPorts = () =>
      numberOfOutputs || model.output.length;
- 
+
    publicAPI.getInputArrayToProcess = (inputPort) => {
      const arrayDesc = model.inputArrayToProcess[inputPort];
      const ds = model.inputData[inputPort];
@@ -960,18 +879,18 @@
      };
    };
  }
- 
+
  // ----------------------------------------------------------------------------
  // Event handling: onXXX(callback), invokeXXX(args...)
  // ----------------------------------------------------------------------------
- 
+
  export const EVENT_ABORT = Symbol('Event abort');
- 
+
  export function event(publicAPI, model, eventName) {
    const callbacks = [];
    const previousDelete = publicAPI.delete;
    let curCallbackID = 1;
- 
+
    function off(callbackID) {
      for (let i = 0; i < callbacks.length; ++i) {
        const [cbID] = callbacks[i];
@@ -981,17 +900,17 @@
        }
      }
    }
- 
+
    function on(callbackID) {
      function unsubscribe() {
        off(callbackID);
      }
- 
+
      return Object.freeze({
        unsubscribe,
      });
    }
- 
+
    function invoke() {
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
@@ -1003,11 +922,11 @@
      const currentCallbacks = callbacks.slice();
      for (let index = 0; index < currentCallbacks.length; ++index) {
        const [, cb, priority] = currentCallbacks[index];
- 
+
        if (!cb) {
          continue; // eslint-disable-line
        }
- 
+
        if (priority < 0) {
          setTimeout(() => cb.apply(publicAPI, arguments), 1 - priority);
        } else {
@@ -1020,74 +939,74 @@
      }
      /* eslint-enable prefer-rest-params */
    }
- 
+
    publicAPI[`invoke${_capitalize(eventName)}`] = invoke;
- 
+
    publicAPI[`on${_capitalize(eventName)}`] = (callback, priority = 0.0) => {
      if (!callback.apply) {
        console.error(`Invalid callback for event ${eventName}`);
        return null;
      }
- 
+
      if (model.deleted) {
        vtkErrorMacro('instance deleted - cannot call any method');
        return null;
      }
- 
+
      const callbackID = curCallbackID++;
      callbacks.push([callbackID, callback, priority]);
      callbacks.sort((cb1, cb2) => cb2[2] - cb1[2]);
      return on(callbackID);
    };
- 
+
    publicAPI.delete = () => {
      previousDelete();
      callbacks.forEach(([cbID]) => off(cbID));
    };
  }
- 
+
  /**
-  * newInstance 
-  * 
-  * @param {*} extend 
-  * @param {*} className 
-  * @returns 
+  * newInstance
+  *
+  * @param {*} extend
+  * @param {*} className
+  * @returns
   */
  export function newInstance(extend, className) {
    const constructor = (initialValues = {}) => {
      const model = {};
      const publicAPI = {};
      extend(publicAPI, model, initialValues);
- 
+
      return Object.freeze(publicAPI);
    };
- 
+
    // Register constructor to factory
    if (className) {
      vtk.register(className, constructor);
    }
- 
+
    return constructor;
  }
- 
+
  /**
   * Chain function calls
-  * 
-  * @param  {...any} fn 
-  * @returns 
+  *
+  * @param  {...any} fn
+  * @returns
   */
  export function chain(...fn) {
    return (...args) => fn.filter((i) => !!i).map((i) => i(...args));
  }
- 
+
  // ----------------------------------------------------------------------------
  // Some utility methods for vtk objects
  // ----------------------------------------------------------------------------
- 
+
  export function isVtkObject(instance) {
    return instance && instance.isA && instance.isA('vtkObject');
  }
- 
+
  export function traverseInstanceTree(
    instance,
    extractFunction,
@@ -1099,13 +1018,13 @@
        // avoid cycles
        return accumulator;
      }
- 
+
      visitedInstances.push(instance);
      const result = extractFunction(instance);
      if (result !== undefined) {
        accumulator.push(result);
      }
- 
+
      // Now go through this instance's model
      const model = instance.get();
      Object.keys(model).forEach((key) => {
@@ -1129,23 +1048,23 @@
        }
      });
    }
- 
+
    return accumulator;
  }
- 
+
  // ----------------------------------------------------------------------------
- // 
- 
+ //
+
  /**
   * Returns a function, that, as long as it continues to be invoked, will not
   * be triggered. The function will be called after it stops being called for
   * N milliseconds. If `immediate` is passed, trigger the function on the
   * leading edge, instead of the trailing.
-  * 
-  * @param {*} func 
-  * @param {*} wait 
-  * @param {*} immediate 
-  * @returns 
+  *
+  * @param {*} func
+  * @param {*} wait
+  * @param {*} immediate
+  * @returns
   */
  export function debounce(func, wait, immediate) {
    let timeout;
@@ -1164,24 +1083,24 @@
        func.apply(context, args);
      }
    };
- 
+
    debounced.cancel = () => clearTimeout(timeout);
- 
+
    return debounced;
  }
- 
+
  /**
   * Creates a throttled function that only invokes `func` at most once per
   * every `wait` milliseconds.
-  * 
-  * @param {*} callback 
-  * @param {*} delay 
-  * @returns 
+  *
+  * @param {*} callback
+  * @param {*} delay
+  * @returns
   */
  export function throttle(callback, delay) {
    let isThrottled = false;
    let argsToUse = null;
- 
+
    function next() {
      isThrottled = false;
      if (argsToUse !== null) {
@@ -1189,7 +1108,7 @@
        argsToUse = null;
      }
    }
- 
+
    function wrapper(...args) {
      if (isThrottled) {
        argsToUse = args;
@@ -1199,28 +1118,28 @@
      callback(...args);
      setTimeout(next, delay);
    }
- 
+
    return wrapper;
  }
- 
- 
+
+
  /**
   * keystore(publicAPI, model, initialKeystore)
-  * 
+  *
   * initialKeystore: Initial keystore. This can be either a Map or an object.
-  * 
+  *
   * Generated API
   *   setKey(key, value) : mixed (returns value)
   *   getKey(key) : mixed
   *   getAllKeys() : [mixed]
   *   deleteKey(key) : Boolean
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} initialKeystore 
+  * @param {*} publicAPI
+  * @param {*} model
+  * @param {*} initialKeystore
   */
  export function keystore(publicAPI, model, initialKeystore = {}) {
    model.keystore = Object.assign(model.keystore || {}, initialKeystore);
- 
+
    publicAPI.setKey = (key, value) => {
      model.keystore[key] = value;
    };
@@ -1230,7 +1149,7 @@
    publicAPI.clearKeystore = () =>
      publicAPI.getAllKeys().forEach((key) => delete model.keystore[key]);
  }
- 
+
  // ----------------------------------------------------------------------------
  // proxy(publicAPI, model, sectionName, propertyUI)
  //
@@ -1245,31 +1164,31 @@
  // ----------------------------------------------------------------------------
  let nextProxyId = 1;
  const ROOT_GROUP_NAME = '__root__';
- 
+
  export function proxy(publicAPI, model) {
    // Proxies are keystores
    keystore(publicAPI, model);
- 
+
    const parentDelete = publicAPI.delete;
- 
+
    // getProxyId
    model.proxyId = `${nextProxyId++}`;
- 
+
    // ui handling
    model.ui = JSON.parse(JSON.stringify(model.ui || [])); // deep copy
    get(publicAPI, model, ['proxyId', 'proxyGroup', 'proxyName']);
    setGet(publicAPI, model, ['proxyManager']);
- 
+
    // group properties
    const propertyMap = {};
    const groupChildrenNames = {};
- 
+
    function registerProperties(descriptionList, currentGroupName) {
      if (!groupChildrenNames[currentGroupName]) {
        groupChildrenNames[currentGroupName] = [];
      }
      const childrenNames = groupChildrenNames[currentGroupName];
- 
+
      for (let i = 0; i < descriptionList.length; i++) {
        childrenNames.push(descriptionList[i].name);
        propertyMap[descriptionList[i].name] = descriptionList[i];
@@ -1281,9 +1200,9 @@
        }
      }
    }
- 
+
    registerProperties(model.ui, ROOT_GROUP_NAME);
- 
+
    publicAPI.updateUI = (ui) => {
      model.ui = JSON.parse(JSON.stringify(ui || [])); // deep copy
      Object.keys(propertyMap).forEach((k) => delete propertyMap[k]);
@@ -1293,11 +1212,11 @@
      registerProperties(model.ui, ROOT_GROUP_NAME);
      publicAPI.modified();
    };
- 
+
    function listProxyProperties(gName = ROOT_GROUP_NAME) {
      return groupChildrenNames[gName];
    }
- 
+
    publicAPI.updateProxyProperty = (propertyName, propUI) => {
      const prop = propertyMap[propertyName];
      if (prop) {
@@ -1306,7 +1225,7 @@
        propertyMap[propertyName] = { ...propUI };
      }
    };
- 
+
    publicAPI.activate = () => {
      if (model.proxyManager) {
        const setActiveMethod = `setActive${_capitalize(
@@ -1317,7 +1236,7 @@
        }
      }
    };
- 
+
    // property link
    model.propertyLinkSubscribers = {};
    publicAPI.registerPropertyLinkForGC = (otherLink, type) => {
@@ -1326,14 +1245,14 @@
      }
      model.propertyLinkSubscribers[type].push(otherLink);
    };
- 
+
    publicAPI.gcPropertyLinks = (type) => {
      const subscribers = model.propertyLinkSubscribers[type] || [];
      while (subscribers.length) {
        subscribers.pop().unbind(publicAPI);
      }
    };
- 
+
    model.propertyLinkMap = {};
    publicAPI.getPropertyLink = (id, persistent = false) => {
      if (model.propertyLinkMap[id]) {
@@ -1343,12 +1262,12 @@
      const links = [];
      let count = 0;
      let updateInProgress = false;
- 
+
      function update(source, force = false) {
        if (updateInProgress) {
          return null;
        }
- 
+
        const needUpdate = [];
        let sourceLink = null;
        count = links.length;
@@ -1360,11 +1279,11 @@
            needUpdate.push(link);
          }
        }
- 
+
        if (!sourceLink) {
          return null;
        }
- 
+
        const newValue =
          sourceLink.instance[`get${_capitalize(sourceLink.propertyName)}`]();
        if (!shallowEquals(newValue, value) || force) {
@@ -1378,14 +1297,14 @@
          }
          updateInProgress = false;
        }
- 
+
        if (model.propertyLinkMap[id].persistent) {
          model.propertyLinkMap[id].value = newValue;
        }
- 
+
        return newValue;
      }
- 
+
      function unbind(instance, propertyName) {
        const indexToDelete = [];
        count = links.length;
@@ -1403,7 +1322,7 @@
          links.splice(indexToDelete.pop(), 1);
        }
      }
- 
+
      function bind(instance, propertyName, updateMe = false) {
        const subscription = instance.onModified(update);
        const other = links[0];
@@ -1428,13 +1347,13 @@
          unsubscribe: () => unbind(instance, propertyName),
        };
      }
- 
+
      function unsubscribe() {
        while (links.length) {
          links.pop().subscription.unsubscribe();
        }
      }
- 
+
      const linkHandler = {
        bind,
        unbind,
@@ -1444,7 +1363,7 @@
      model.propertyLinkMap[id] = linkHandler;
      return linkHandler;
    };
- 
+
    // extract values
    function getProperties(groupName = ROOT_GROUP_NAME) {
      const values = [];
@@ -1467,15 +1386,15 @@
      }
      return values;
    }
- 
+
    publicAPI.listPropertyNames = () => getProperties().map((p) => p.name);
- 
+
    publicAPI.getPropertyByName = (name) =>
      getProperties().find((p) => p.name === name);
- 
+
    publicAPI.getPropertyDomainByName = (name) =>
      (propertyMap[name] || {}).domain;
- 
+
    // ui section
    publicAPI.getProxySection = () => ({
      id: model.proxyId,
@@ -1483,7 +1402,7 @@
      ui: model.ui,
      properties: getProperties(),
    });
- 
+
    // free resources
    publicAPI.delete = () => {
      const list = Object.keys(model.propertyLinkMap);
@@ -1496,10 +1415,10 @@
      );
      parentDelete();
    };
- 
+
    // @todo fix infinite recursion due to active source
    publicAPI.getState = () => null;
- 
+
    function registerLinks() {
      // Allow dynamic registration of links at the application level
      if (model.links) {
@@ -1514,28 +1433,28 @@
        }
      }
    }
- 
+
    setImmediateVTK(registerLinks);
  }
- 
+
  /**
   * proxyPropertyMapping(publicAPI, model, map)
-  * 
+  *
   * map = {
   *   opacity: { modelKey: 'property', property: 'opacity' },
   * }
-  * 
+  *
   * Generated API:
   * Elevate set/get methods from internal object stored in the model to current one
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} map 
+  *
+  * @param {*} publicAPI
+  * @param {*} model
+  * @param {*} map
   */
  export function proxyPropertyMapping(publicAPI, model, map) {
    const parentDelete = publicAPI.delete;
    const subscriptions = [];
- 
+
    const propertyNames = Object.keys(map);
    let count = propertyNames.length;
    while (count--) {
@@ -1549,7 +1468,7 @@
        subscriptions.push(model[modelKey].onModified(publicAPI.modified));
      }
    }
- 
+
    publicAPI.delete = () => {
      while (subscriptions.length) {
        subscriptions.pop().unsubscribe();
@@ -1557,10 +1476,10 @@
      parentDelete();
    };
  }
- 
+
  /**
   * proxyPropertyState(publicAPI, model, state, defaults)
-  * 
+  *
   * state = {
   *  representation: {
   *    'Surface with edges': { property: { edgeVisibility: true, representation: 2 } },
@@ -1575,11 +1494,11 @@
   *
   * Generated API:
   * get / set Representation ( string ) => push state to various internal objects
-  * 
-  * @param {*} publicAPI 
-  * @param {*} model 
-  * @param {*} state 
-  * @param {*} defaults 
+  *
+  * @param {*} publicAPI
+  * @param {*} model
+  * @param {*} state
+  * @param {*} defaults
   */
  export function proxyPropertyState(
    publicAPI,
@@ -1588,7 +1507,7 @@
    defaults = {}
  ) {
    model.this = publicAPI;
- 
+
    function applyState(map) {
      const modelKeys = Object.keys(map);
      let count = modelKeys.length;
@@ -1597,14 +1516,14 @@
        model[modelKey].set(map[modelKey]);
      }
    }
- 
+
    const modelKeys = Object.keys(defaults);
    let count = modelKeys.length;
    while (count--) {
      // Add default
      const key = modelKeys[count];
      model[key] = defaults[key];
- 
+
      // Add set method
      const mapping = state[key];
      publicAPI[`set${_capitalize(key)}`] = (value) => {
@@ -1616,13 +1535,13 @@
        }
      };
    }
- 
+
    // Add getter
    if (modelKeys.length) {
      get(publicAPI, model, modelKeys);
    }
  }
- 
+
  // ----------------------------------------------------------------------------
  // From : https://github.com/facebookarchive/fixed-data-table/blob/master/src/vendor_upstream/dom/normalizeWheel.js
  //
@@ -1734,18 +1653,18 @@
  //         Firefox v4/Win7  |     undefined    |       3
  //
  // ----------------------------------------------------------------------------
- 
+
  // Reasonable defaults
  const PIXEL_STEP = 10;
  const LINE_HEIGHT = 40;
  const PAGE_HEIGHT = 800;
- 
+
  export function normalizeWheel(wheelEvent) {
    let sX = 0; // spinX
    let sY = 0; // spinY
    let pX = 0; // pixelX
    let pY = 0; // pixelY
- 
+
    // Legacy
    if ('detail' in wheelEvent) {
      sY = wheelEvent.detail;
@@ -1759,23 +1678,23 @@
    if ('wheelDeltaX' in wheelEvent) {
      sX = -wheelEvent.wheelDeltaX / 120;
    }
- 
+
    // side scrolling on FF with DOMMouseScroll
    if ('axis' in wheelEvent && wheelEvent.axis === wheelEvent.HORIZONTAL_AXIS) {
      sX = sY;
      sY = 0;
    }
- 
+
    pX = sX * PIXEL_STEP;
    pY = sY * PIXEL_STEP;
- 
+
    if ('deltaY' in wheelEvent) {
      pY = wheelEvent.deltaY;
    }
    if ('deltaX' in wheelEvent) {
      pX = wheelEvent.deltaX;
    }
- 
+
    if ((pX || pY) && wheelEvent.deltaMode) {
      if (wheelEvent.deltaMode === 1) {
        // delta in LINE units
@@ -1787,7 +1706,7 @@
        pY *= PAGE_HEIGHT;
      }
    }
- 
+
    // Fall-back if spin cannot be determined
    if (pX && !sX) {
      sX = pX < 1 ? -1 : 1;
@@ -1795,7 +1714,7 @@
    if (pY && !sY) {
      sY = pY < 1 ? -1 : 1;
    }
- 
+
    return {
      spinX: sX,
      spinY: sY,
@@ -1803,8 +1722,8 @@
      pixelY: pY,
    };
  }
- 
- 
+
+
  // Default export
  export default {
    algo,

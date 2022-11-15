@@ -1,0 +1,218 @@
+# `macros.js`
+- `globalMTime`
+- `VOID`
+- `getCurrentGlobalMTime()`
+- `fakeConsole`
+- `noOp()`
+- `consoleMethods`
+- `loggerFunctions`
+- `setLoggerFunction(name, fn)`
+- `vtkLogMacro(...args)`
+- `vtkInfoMacro(...args)`
+- `vtkDebugMacro(...args)`
+- `vtkErrorMacro(...args)`
+- `vtkWarningMacro(...args)`
+- `ERROR_ONCE_MAP`
+- `vtkOnceErrorMacro(str)`
+- `TYPED_ARRAYS`
+- `newTypedArray(type, ...args)`
+- `newTypedArrayFrom(type, ...args)`
+- `capitalize(str)`
+- `_capitalize(str)`
+- `uncapitalize(str)`
+- `formatBytesToProperUnit(size, precision = 2, chunkSize = 1000)`
+- `formatNumbersWithThousandSeparator(n, separator = ' ')`
+- `safeArrays(model)`
+- `shallowEquals(a, b)`
+- `enumToString(e, value)`
+- `getStateArrayMapFunc(item)`
+- `setImmediateVTK(fn)`
+- `measurePromiseExecution(promise, callback)`
+- `obj(publicAPI = {}, model = {})`
+- `publicAPI`
+    - `.isDeleted()`
+    - `.modified(otherMTime)`
+    - `.onModified(callback)`
+    - `.getMTime()`
+    - `.isA(className)`
+    - `.getClassName(depth = 0)`
+    - `.set(map = {}, noWarning = false, noFunction = false)`
+    - `.get(...list)`
+    - `.getReferenceByName(val)`
+    - `.delete()`
+    - `.getState()`
+    - `.shallowCopy(other, debug = false)`
+    - `.toJSON`
+- `objectGetterMap`
+    - `object(publicAPI, model, field)`
+- `get(publicAPI, model, fieldNames)`
+- `objectSetterMap`
+    - `enum(publicAPI, model, field)`
+    - `object(publicAPI, model, field)`
+- `findSetter(field)`
+    - `getSetter(publicAPI, model)`
+        - `setter(value)`
+- `set(publicAPI, model, fields)`
+- `setGet(publicAAPI, model, fieldNames)`
+- `getArray(publicAPI, model, fieldNames)`
+- `setArray(publicAPI, model, fieldNames, size, defaultVal = undefined)`
+- `setGetArray(publicAPI, model, fieldNames, size, defaultVal = undefined)`
+- `moveToProtected(publicAPI, model, fieldNames)`
+- `algo(publicAPI, model, numberOfInputs, numberofOutputs)`
+    - `.setInputData(dataset, port = 0)`
+    - `.getInputData(port = 0)`
+    - `.setInputConnection(outputPort, port = 0)`
+    - `.getInputConnection(port = 0)`
+    - `.getPortToFill()`
+    - `.addInputConnection(outputPort)`
+    - `.addInputData(dataset)`
+    - `.getOutputData(port = 0)`
+    - `.getOutputPort(port = 0)`
+
+- `publicAPI`
+    - `.shouldUpdate()`
+    - `.setInputData`
+    - `.setInputConnection`
+    - `.addInputData`
+    - `.addInputConnection`
+    - `.getInputData`
+    - `.getInputConnection`
+    - `.getOutputData`
+    - `.getOutputPort`
+    - `.update()`
+    - `.getNumberOfInputPorts()`
+    - `.getNumberOfOutputPorts()`
+    - `.getInputArrayToProcess(inputPort)`
+    - `.setInputArrayToProcess(inputPort, arrayName, fieldAssociation, attributeType = 'Scalars')`
+    - `.delete()`
+    - `.setKey(key, value)`
+    - `.getKey(key)`
+    - `.getAllKeys()`
+    - `.deleteKey(key)`
+    - `.clearKeystore()`
+    - `.updateUI(ui)`
+    - `.updateProxyProperty(propertyName, propUI)`
+    - `.activate()`
+    - `.registerPropertyLinkForGC(otherLink, type)`
+    - `.gcPropertyLinks(type)`
+    - `.getPropertyLink(id, persistent = false)`
+        `.update(source, force = false)`
+    - `.listPropertyNames()`
+    - `.getPropertyName(name)`
+    - `.getPropertyDomainByName(name)`
+    - `.getProxySection()`
+    - `.delete()`
+    - `.getState()`
+- `EVENT_ABORT`
+- `event(publicAPI, model, eventName)`
+    - `.off(callbackID)`
+    - `.on(callbackID)`
+    - `.invoke()`
+- `newInstance(extend, className)`
+    - `.constructor(initialValues = {})`
+- `chain(...fn)`
+- `isVtkObject(instance)`
+- `traverseInstanceTree(instance, extractFunction, accumulator = [], visitedInstances = [])`
+- `debounce(func, wait, immediate)`
+- `throttle(callback, delay)`
+    - `.next()`
+    - `.wrapper(...args)`
+- `keystore(publicAPI, model, initialKeystore = {})`
+- `proxy(publicAPI, model)`
+    - `.registerProperties(descriptionList, currentGroupName)`
+    - `.listProxyProperties(gName = ROOT_GROUP_NAME)`
+    - `.unbind(instance, propertyName)`
+    - `.bind(instance, propertyName, updateMe = false)`
+    - `.unsubscribe()`
+    - `.getProperties(groupName = ROOT_GROUP_NAME)`
+    - `.registerLinks()`
+- `proxyPropertyMapping(publicAPI, model, map)`
+- `proxyPropertyState(publicAPI, model, state = {}, defaults = {})`
+    - `.applyState(map)`
+- Fixed Data Table from Facebook
+    - `PIXEL_STEP`
+    - `LINE_HEIGHT`
+    - `PAGE_HEIGHT`
+    - `normalizeWheel(wheelEvent)`
+
+# `macros.d.ts`
+- `setLoggerFunction(name, fn(...args))`
+- `vtkLogMacro(...args)`
+- `vtkInfoMacro(...args)`
+- `vtkDebugMacro(...args)`
+- `vtkErrorMacro(...args)`
+- `vtkWarningMacro(...args)`
+- `vtkOnceErrorMacro(str)`
+- `TYPED_ARRAYS`
+- `capitalize(str)`
+- `_capitalize(str)`
+- `uncapitalize(str)`
+- `formatBytesToProperUnit(size, precision, chunkSize)`
+- `formatNumbersWithThousandSeparate(n, separator)`
+- `safeArrays(model)`
+- `enumToString(e, value)`
+- `getStateArrayMapFunc(item)`
+- `setImmediateVTK(fn())`
+- `measurePromiseExecution(promise, callback)`
+- `obj(publicAPI, object, model)`
+- `get(publicAPI, model, fieldNames)`
+- `set(publicAPI, model, fields)`
+- `setGet(publicAPI, model, fields)`
+- `getArray(publicAPI, model, fields)`
+- `setArray(publicAPI, model, fieldNames, size, defaultVal)`
+- `setGetArray(publicAPI, model, fieldNames, size, defaultVal)`
+- `moveToProtected(publicAPI, model, fieldNames)`
+- `algo(publicAPI, model, numberOfInputs, numberOfOutputs)`
+- `VOID`
+- `EVENT_ABORT`
+- `event(publicAPI, model, eventName)`
+- `VtkCallback(...args)`
+- `VtkChangeEvent`
+    - `.invokeChange(...args)`
+    - `.onChange(VtkCallback, priority)`
+- `VtkExtend(publicAPI, model, initialValues)`
+- `newInstance(extend, className)`
+- `chain(...fn)`
+- `isVtkObject(instance)`
+- `traverseInstanceTree(instance, extractFunction, accumulator, visitedInstances)`
+- `debounce(func, wait, immediate)`
+- `throttle(callback, delay)`
+- `VtkKeyStore`
+    - `.setKey(key, value)`
+    - `.getKey(key)`
+    - `.getAllKeys()`
+    - `.deleteKey(key)`
+    - `.clearKeystore()`
+- `keystore(publicAPI, model, initialKeyStore)`
+- `VtkProxyManager`
+- `VtkProxySection`
+- `VtkLink`
+    - `.bind(instance, propertyName, updateMe)`
+    - `.unbind(instance, propertyName)`
+    - `unsubscribe()`
+    - `persistent`
+- `VtkProxy extends VtkKeyStore`
+    - `.getProxyId()`
+    - `.getProxyGroup()`
+    - `.getProxyName()`
+    - `.setProxyManager(pxm)`
+    - `.getProxyManager()`
+    - `.updateUI(ui)`
+    - `.listProxyProperties(groupName)`
+    - `.updateProxyProperty(propertyName, propUI)`
+    - `.activate()`
+    - `.registerPropertyLinkForGC(otherLink, type)`
+    - `.gcPropertyLinks(type)`
+    - `.getPropertyLink(id, boolean)`
+    - `.getProperties(groupName)`
+    - `.listPropertyNames()`
+    - `.getPropertyByName(name)`
+    - `.getPropertyDomainByName(name)`
+    - `.getProxySection()`
+    - `.delete()`
+- `proxy(publicAPI, model)`
+- `proxyPropertyMapping(publicAPI, model, map)`
+- `proxyPropertyState(publicAPI, model, state, defaults)`
+- Facebook
+    - `VtkNormalizedWheelEvent`
+    - `normalizeWheel(wheelEvent)`

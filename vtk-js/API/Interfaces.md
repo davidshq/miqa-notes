@@ -1,0 +1,42 @@
+# `interfaces.d.ts`
+- `vtkSubscription`
+    - `unsubscribe()`
+- `vtkRange`
+- `vtkDebouncedFunction`
+    - `.cancel()`
+- `vtkOutputPort`
+    - `filter`
+- `vtkAlgorithm`
+    - `setInputData(dataset, port)`
+    - `getInputData(port)`
+    - `setInputConnection(outputPort, port)`
+    - `getInpoutConnection(port)`
+    - `addInputConnection(outputPort)`
+    - `addInputData(dataset)`
+    - `getOutputData(port)`
+    - `shouldUpdate()`
+    - `getOutputPort(port)`
+    - `update()`
+    - `getNumberOfInputPorts()`
+    - `getNumberOfOutputPorts()`
+    - `getInputArrayToProcess(inputPort)`
+    - `setInputArrayToProcess(inputPort, arrayName, fieldAssociation, attributeType)`
+- `vtkObject`
+    - `isDeleted()`
+    - `modified()`
+    - `onModified(callback)`
+    - `getMTime()`
+    - `isA(className)`
+    - `getClassName()`
+    - `set(map, noWarning, noFunction)`
+    - `get(...listOfKeys)`
+    - `getReferenceByName(name)`
+    - `delete()`
+    - `getState()`
+    - `toJSON()`
+    - `shallowCopy(other, debug)`
+- `vtkProperty`
+    - `name`
+    - `children`
+- `vtkPropertyDomain`
+- `EventHandler(...args)`

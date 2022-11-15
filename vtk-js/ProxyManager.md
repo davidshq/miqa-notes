@@ -1,0 +1,93 @@
+- `addRegistrationAPI`
+- `unRegisterProxy`
+
+- `publicAPI`
+    - `.setActiveSource`
+        - `.getType`
+        - `.getProxyId`
+    - `.setActiveView`
+        - `.getProxyId`
+        - `.getProxyName`
+    - `.getProxyById`
+    - `.getProxyGroups`
+    - `.getProxyInGroup`
+    - `.getSources`
+    - `.getRepresentations`
+    - `.getViews`
+    - `.createProxy`
+    - `.getRepresentation`
+    - `.getActiveSource`
+    - `.getActiveView`
+    - `.createProxy`
+        - `.getProxyId`
+        - `.setInput`
+    - `.deleteProxy`
+    - `.registerProxy`
+    - `.invokeProxyRegistrationChange`
+    - `.modified`
+    - `.invokeActiveSourceChange`
+
+
+- `model`
+    - `.proxyIdMapping`
+    - `.proxyByGroup`
+        - `.Sources`
+        - `.Representations`
+        - `.Views`
+    - `.activeSource`
+    - `.activeSubscription`
+        - `.unsubscribe`
+    - `.activeSourceSubscription`
+    - `.activeView`
+    - `.activeViewSubscription`
+        - `.unsubscribe`
+    - `.proxyConfiguration`
+        - `.definitions`
+            - `.options`
+                - `activateOnCreate`
+            - `.class`
+            - `.proxyProps`
+            - `.props`
+            - `.name`
+        - `.representations`
+    - `.sv2rMapping`
+    - `.r2svMapping`
+    - `.collapseState`
+    - `.lookupTables`
+    - `.piecewiseFunctions`
+    - `.animating`
+    - `.ActiveSourceChange`
+    - `.ActiveViewChange`
+    - `.ProxyRegistrationChange`
+
+- `proxy`
+    - `.getProxyId`
+    - `.getProxyGroup`
+    - `.proxyByGroup`
+    - `.setProxyManager`
+    - `.getProxyName`
+    - `.gcPropertyLinks` (application, source)
+    - `.activate`
+    - `.getRepresentations`
+    - `.setContainer`
+
+- `view`
+    - `.onModified`    
+
+# Resources
+- https://slideplayer.com/slide/5833284/ - For ParaView, but helpful in understanding purpose of proxies.
+    - Is there some equivalence between ProxyManager in VTK.js and ParaView's Server Manager?
+- https://juser.fz-juelich.de/record/188899/files/ParaViewPluginsTutorial.pdf
+    - "ParaView uses the VTK Server Manager for building distributed client-server applications by means of the Proxy design pattern"
+    - "Proxies are organized in ProxyGroups"
+        - "Examples: sources, filters, views, ..."
+    - "Each Proxy stores a reference to the corresponding VTK object located on the server"
+        - "Examples: SourceProxy, ViewProxy, ..."
+    - "The Proxy contains Properties to describe the part of the interface which is exposed to the client (function name and arguments)"
+        - "Examples: IntVectorProperty, StringVectorProperty, InputProperty, ..."
+    - "The range of values can be restricted by Domains"
+        - "Examples: IntRangeDomain, FileListDomain, DataTypeDomain, ProxyGroupDomain, ..."
+- https://www.creatis.insa-lyon.fr/~davila/bbtk/Software/new/doc/VTK_Documentation/report-about-paraview-2007-07.pdf
+- https://itk.org/Wiki/images/f/f9/Servermanager2.pdf
+    - "Property objects are used to read and modify the properties of VTK objects represented by proxies."
+https://www.osti.gov/servlets/purl/1706427 // https://itk.org/Wiki/images/f/f9/Servermanager2.pdf
