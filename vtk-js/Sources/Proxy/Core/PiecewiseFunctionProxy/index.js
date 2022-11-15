@@ -7,8 +7,6 @@ import Constants from './Constants';
 
 const { Mode, Defaults } = Constants;
 
-// ----------------------------------------------------------------------------
-
 function applyPointsToPiecewiseFunction(points, range, pwf) {
     const width = range[1] - range[0];
     const rescaled = points.map(([x, y]) => [x * width + range[0], y]);
@@ -17,8 +15,6 @@ function applyPointsToPiecewiseFunction(points, range, pwf) {
     rescaled.forEach(([x, y]) => pwf.addPoint(x, y));
 }
 
-// ----------------------------------------------------------------------------
-
 function applyNodesToPiecewiseFunction(nodes, range, pwf) {
     const width = range[1] - range[0];
     const rescaled = nodes.map((n) => ({ ...n, x: n.x * width + range[0] }));
@@ -26,17 +22,17 @@ function applyNodesToPiecewiseFunction(nodes, range, pwf) {
     pwf.setNodes(rescaled);
 }
 
-// ----------------------------------------------------------------------------
-
 function copyGaussians(gaussians) {
     // gaussians is assumed to be an array of gaussian objects
     return gaussians.map((g) => ({ ...g }));
 }
 
-// ----------------------------------------------------------------------------
-// vtkPiecewiseFunctionProxy methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkPiecewiseFunctionProxy Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 function vtkPiecewiseFunctionProxy(publicAPI, model) {
     // Set our className
     model.classHierarchy.push('vtkPiecewiseFunctionProxy');
@@ -176,7 +172,5 @@ export const newInstance = macro.newInstance(
     extend,
     'vtkPiecewiseFunctionProxy'
 );
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend, Mode, Defaults };
