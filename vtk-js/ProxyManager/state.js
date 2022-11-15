@@ -1,6 +1,11 @@
 import vtk from 'vtk.js/Sources/vtk';
 import vtkPiecewiseFunctionProxy from 'vtk.js/Sources/Proxy/Core/PiecewiseFunctionProxy';
 
+/**
+ * 
+ * @param {*} proxy 
+ * @returns 
+ */
 function getProperties(proxy) {
   const props = {};
   proxy.listPropertyNames().forEach((name) => {
@@ -9,10 +14,12 @@ function getProperties(proxy) {
   return props;
 }
 
-// ----------------------------------------------------------------------------
-// Proxy State Handling
-// ----------------------------------------------------------------------------
-
+/**
+ * Proxy State Handling: addStateAPI
+ * 
+ * @param {*} publicAPI 
+ * @param {*} model 
+ */
 export default function addStateAPI(publicAPI, model) {
   publicAPI.loadState = (state, options = {}) =>
     new Promise((resolve, reject) => {
@@ -133,6 +140,12 @@ export default function addStateAPI(publicAPI, model) {
         .catch(reject);
     });
 
+    /**
+     * Proxy State Handing: Save State
+     * @param {*} options 
+     * @param {*} userData 
+     * @returns 
+     */
   publicAPI.saveState = (options = {}, userData = {}) =>
     new Promise((resolve, reject) => {
       const sources = publicAPI.getSources();

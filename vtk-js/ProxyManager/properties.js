@@ -1,8 +1,13 @@
+// TODO: is the V for View?
 export default function addVPropertyHandlingAPI(publicAPI, model) {
     // --------------------------------------------------------------------------
     // Property management
     // --------------------------------------------------------------------------
   
+    /**
+     * 
+     * @returns 
+     */
     publicAPI.getSections = () => {
       const sections = [];
       const source = publicAPI.getActiveSource();
@@ -12,6 +17,7 @@ export default function addVPropertyHandlingAPI(publicAPI, model) {
       const view = publicAPI.getActiveView();
       if (source) {
         const section = source.getProxySection();
+        // If there are ui properties
         if (section.ui.length) {
           sections.push(
             Object.assign(section, {
@@ -46,15 +52,20 @@ export default function addVPropertyHandlingAPI(publicAPI, model) {
       return sections;
     };
   
-    // --------------------------------------------------------------------------
-  
+    /**
+     * 
+     * @param {*} name 
+     * @param {*} state 
+     */
     publicAPI.updateCollapseState = (name, state) => {
       model.collapseState[name] = state;
       publicAPI.modified();
     };
   
-    // --------------------------------------------------------------------------
-  
+    /**
+     * 
+     * @param {*} changeSet 
+     */
     publicAPI.applyChanges = (changeSet) => {
       const groupBy = {};
       const keys = Object.keys(changeSet);
@@ -93,6 +104,13 @@ export default function addVPropertyHandlingAPI(publicAPI, model) {
     // Color Management
     // --------------------------------------------------------------------------
   
+    /**
+     * Color Management
+     * 
+     * @param {*} arrayName 
+     * @param {*} options 
+     * @returns 
+     */
     publicAPI.getLookupTable = (arrayName, options) => {
       if (!model.lookupTables[arrayName]) {
         model.lookupTables[arrayName] = publicAPI.createProxy(
@@ -104,8 +122,12 @@ export default function addVPropertyHandlingAPI(publicAPI, model) {
       return model.lookupTables[arrayName];
     };
   
-    // --------------------------------------------------------------------------
-  
+    /**
+     * 
+     * @param {*} arrayName 
+     * @param {*} options 
+     * @returns 
+     */
     publicAPI.getPiecewiseFunction = (arrayName, options) => {
       if (!model.piecewiseFunctions[arrayName]) {
         model.piecewiseFunctions[arrayName] = publicAPI.createProxy(
@@ -117,8 +139,11 @@ export default function addVPropertyHandlingAPI(publicAPI, model) {
       return model.piecewiseFunctions[arrayName];
     };
   
-    // --------------------------------------------------------------------------
-  
+    /**
+     * 
+     * @param {*} arrayName 
+     * @param {*} dataRange 
+     */
     publicAPI.rescaleTransferFunctionToDataRange = (arrayName, dataRange) => {
       const lut = publicAPI.getLookupTable(arrayName);
       const pwf = publicAPI.getPiecewiseFunction(arrayName);

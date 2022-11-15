@@ -2,11 +2,18 @@ import macro from 'vtk.js/Sources/macros';
 
 const { vtkErrorMacro } = macro;
 
-// ----------------------------------------------------------------------------
-// Proxy Registration Handling
-// ----------------------------------------------------------------------------
-
+/**
+ * Proxy Registration Handling: addRegistrationAPI
+ * 
+ * @param {*} publicAPI 
+ * @param {*} model 
+ */
 export default function addRegistrationAPI(publicAPI, model) {
+  /**
+   * 
+   * @param {*} proxy 
+   * @returns 
+   */
   function registerProxy(proxy) {
     if (!proxy) {
       return;
@@ -33,8 +40,12 @@ export default function addRegistrationAPI(publicAPI, model) {
     });
   }
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * Proxy Deregistration
+   * 
+   * @param {*} proxyOrId 
+   * @returns 
+   */
   function unRegisterProxy(proxyOrId) {
     const id = proxyOrId.getProxyId ? proxyOrId.getProxyId() : proxyOrId;
     const proxy = model.proxyIdMapping[id];

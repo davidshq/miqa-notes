@@ -1,16 +1,31 @@
 import macro from 'vtk.js/Sources/macros';
 
+/**
+ * 
+ * @param {*} publicAPI 
+ * @param {*} model 
+ */
 export default function addViewHandlingAPI(publicAPI, model) {
+  /**
+   * 
+   * @param {*} options 
+   * @returns 
+   */
   publicAPI.create3DView = (options) =>
     publicAPI.createProxy('Views', 'View3D', options);
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} options 
+   * @returns 
+   */
   publicAPI.create2DView = (options) =>
     publicAPI.createProxy('Views', 'View2D', options);
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} view 
+   */
   publicAPI.render = (view) => {
     const viewToRender = view || publicAPI.getActiveView();
     if (viewToRender) {
@@ -18,8 +33,10 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} blocking 
+   */
   publicAPI.renderAllViews = (blocking = false) => {
     const allViews = publicAPI.getViews();
     for (let i = 0; i < allViews.length; i++) {
@@ -27,8 +44,10 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} enable 
+   */
   publicAPI.setAnimationOnAllViews = (enable = false) => {
     const allViews = publicAPI
       .getViews()
@@ -38,8 +57,9 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   */
   function clearAnimations() {
     model.animating = false;
     const allViews = publicAPI.getViews();
@@ -48,8 +68,10 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   }
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} debouceTimout 
+   */
   publicAPI.autoAnimateViews = (debouceTimout = 250) => {
     if (!model.animating) {
       model.animating = true;
@@ -62,8 +84,9 @@ export default function addViewHandlingAPI(publicAPI, model) {
     model.clearAnimations();
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   */
   publicAPI.resizeAllViews = () => {
     const allViews = publicAPI.getViews();
     for (let i = 0; i < allViews.length; i++) {
@@ -71,8 +94,10 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} view 
+   */
   publicAPI.resetCamera = (view) => {
     const viewToRender = view || publicAPI.getActiveView();
     if (viewToRender && viewToRender.resetCamera) {
@@ -80,8 +105,10 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   * @param {*} source 
+   */
   publicAPI.createRepresentationInAllViews = (source) => {
     const allViews = publicAPI.getViews();
     for (let i = 0; i < allViews.length; i++) {
@@ -89,8 +116,9 @@ export default function addViewHandlingAPI(publicAPI, model) {
     }
   };
 
-  // --------------------------------------------------------------------------
-
+  /**
+   * 
+   */
   publicAPI.resetCameraInAllViews = () => {
     const allViews = publicAPI.getViews();
     for (let i = 0; i < allViews.length; i++) {

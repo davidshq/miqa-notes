@@ -5,8 +5,12 @@ import state from './state';
 import view from './view';
 import properties from './properties';
 
-// ----------------------------------------------------------------------------
-
+/**
+ * 
+ * @param {*} publicAPI 
+ * @param {*} model 
+ * @param {*} initialValues 
+ */
 export function extend(publicAPI, model, initialValues = {}) {
   Object.assign(
     model,
@@ -46,10 +50,7 @@ export function extend(publicAPI, model, initialValues = {}) {
   model.classHierarchy.push('vtkProxyManager');
 }
 
-// ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkProxyManager');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend };
