@@ -9,8 +9,15 @@ const { DefaultDataType } = Constants;
 // Global methods
 // ----------------------------------------------------------------------------
 
-// Original source from https://www.npmjs.com/package/compute-range
-// Modified to accept type arrays
+/**
+ * Original source from https://www.npmjs.com/package/compute-range
+ * Modified to accept type arrays
+ *
+ * @param {*} arr
+ * @param {*} offset
+ * @param {*} numberOfComponents
+ * @returns
+ */
 function fastComputeRange(arr, offset, numberOfComponents) {
     const len = arr.length;
     let min;
@@ -63,6 +70,13 @@ function createRangeHelper() {
     };
 }
 
+/**
+ *
+ * @param {*} values
+ * @param {*} component
+ * @param {*} numberOfComponents
+ * @returns
+ */
 function computeRange(values, component = 0, numberOfComponents = 1) {
     if (component < 0 && numberOfComponents > 1) {
         // Compute magnitude
@@ -85,6 +99,12 @@ function computeRange(values, component = 0, numberOfComponents = 1) {
     );
 }
 
+/**
+ *
+ * @param {*} rangeArray
+ * @param {*} size
+ * @returns
+ */
 function ensureRangeSize(rangeArray, size = 0) {
     const ranges = rangeArray || [];
     // Pad ranges with null value to get the
@@ -94,11 +114,21 @@ function ensureRangeSize(rangeArray, size = 0) {
     return ranges;
 }
 
+/**
+ *
+ * @param {*} typedArray
+ * @returns
+ */
 function getDataType(typedArray) {
     // Expects toString() to return "[object ...Array]"
     return Object.prototype.toString.call(typedArray).slice(8, -1);
 }
 
+/**
+ *
+ * @param {*} normArray
+ * @returns
+ */
 function getMaxNorm(normArray) {
     const numComps = normArray.getNumberOfComponents();
     let maxNorm = 0.0;
@@ -113,10 +143,7 @@ function getMaxNorm(normArray) {
     return maxNorm;
 }
 
-// ----------------------------------------------------------------------------
 // Static API
-// ----------------------------------------------------------------------------
-
 export const STATIC = {
     computeRange,
     createRangeHelper,
@@ -125,10 +152,12 @@ export const STATIC = {
     getMaxNorm,
 };
 
-// ----------------------------------------------------------------------------
-// vtkDataArray methods
-// ----------------------------------------------------------------------------
-
+/**
+ * vtkDataArray Methods
+ *
+ * @param {*} publicAPI
+ * @param {*} model
+ */
 function vtkDataArray(publicAPI, model) {
     // Set our className
     model.classHierarchy.push('vtkDataArray');
@@ -140,6 +169,7 @@ function vtkDataArray(publicAPI, model) {
 
     /**
      * Resize model.values and copy the old values to the new array.
+     *
      * @param {Number} requestedNumTuples Final expected number of tuples; must be >= 0
      * @returns {Boolean} True if a resize occured, false otherwise
      */
@@ -179,18 +209,26 @@ function vtkDataArray(publicAPI, model) {
 
     publicAPI.getElementComponentSize = () => model.values.BYTES_PER_ELEMENT;
 
-    // Description:
-    // Return the data component at the location specified by tupleIdx and
-    // compIdx.
+    /**
+     * Return the data component at the location specified by tupleIdx and compIdx.
+     *
+     * @param {*} tupleIdx
+     * @param {*} compIdx
+     * @returns
+     */
     publicAPI.getComponent = (tupleIdx, compIdx = 0) =>
         model.values[tupleIdx * model.numberOfComponents + compIdx];
 
-    // Description:
-    // Set the data component at the location specified by tupleIdx and compIdx
-    // to value.
-    // Note that i is less than NumberOfTuples and j is less than
-    //  NumberOfComponents. Make sure enough memory has been allocated
-    // (use SetNumberOfTuples() and SetNumberOfComponents()).
+    /**
+     * Set the data component at the location specified by tupleIdx and compIdx to value.
+     * Note that i is less than NumberOfTuples and j is less than
+     * NumberOfComponents. Make sure enough memory has been allocated
+     * (use SetNumberOfTuples() and SetNumberOfComponents())
+     *
+     * @param {*} tupleIdx
+     * @param {*} compIdx
+     * @param {*} value
+     */
     publicAPI.setComponent = (tupleIdx, compIdx, value) => {
         if (value !== model.values[tupleIdx * model.numberOfComponents + compIdx]) {
             model.values[tupleIdx * model.numberOfComponents + compIdx] = value;
@@ -505,7 +543,5 @@ export function extend(publicAPI, model, initialValues = {}) {
 // ----------------------------------------------------------------------------
 
 export const newInstance = macro.newInstance(extend, 'vtkDataArray');
-
-// ----------------------------------------------------------------------------
 
 export default { newInstance, extend, ...STATIC, ...Constants };

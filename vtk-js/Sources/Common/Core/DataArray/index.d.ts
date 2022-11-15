@@ -2,9 +2,7 @@ import { vtkObject, vtkRange } from "../../../interfaces";
 import { float, int, Nullable, Range, TypedArray } from "../../../types";
 
 
-/**
- * Output of the rangeHelper instance
- */
+// Output of the rangeHelper instance
 interface VtkStatisticInformation {
     min: number;
     max: number;
@@ -13,18 +11,14 @@ interface VtkStatisticInformation {
     mean: number;
 }
 
-/**
- * Helper class used to compute data range of a set of numbers
- */
+// Helper class used to compute data range of a set of numbers
 interface vtkRangeHelper {
     add(value: number): void;
     get(): VtkStatisticInformation;
     getRange(): vtkRange;
 }
 
-/**
- * The inital values of a vtkDataArray.
- */
+// The inital values of a vtkDataArray.
 export interface IDataArrayInitialValues {
     dataType?: string;
     empty?: boolean;
@@ -37,13 +31,12 @@ export interface IDataArrayInitialValues {
 
 export interface vtkDataArray extends vtkObject {
 
-    /**
-     * Get the size, in bytes, of the lowest-level element of an array.
-     */
+    // Get the size, in bytes, of the lowest-level element of an array.
     getElementComponentSize(): number;
 
     /**
      * Get the component for a given tupleIdx.
+     *
      * @param {Number} tupleIdx
      * @param {Number} [componentIndex] (default: 0)
      */
@@ -51,15 +44,14 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Set the component value for a given tupleIdx and componentIndex.
+     *
      * @param {Number} tupleIdx
      * @param {Number} componentIndex
      * @param {Number} value
      */
     setComponent(tupleIdx: number, componentIndex: number, value: number): void;
 
-    /**
-     *
-     */
+    // TODO: Define
     getData(): number[]|TypedArray;
 
     /**
@@ -78,6 +70,7 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Set the given tuple at the given index.
+     *
      * @param {Number} idx
      * @param {Array<Number>|TypedArray} tuple
      */
@@ -85,6 +78,7 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Set the given tuples starting at the given index.
+     *
      * @param {Number} idx
      * @param {Array<Number>|TypedArray} tuples
      */
@@ -102,6 +96,7 @@ export interface vtkDataArray extends vtkObject {
      * `for (int i = 0; i < N; ++i) {
      * `  const x = dataArray.getTuple(idx);`
      * `...`
+     *
      * @param {Number} idx
      * @param {Number[]|TypedArray} [tupleToFill] (default [])
      * @returns {Number[]|TypedArray}
@@ -171,6 +166,7 @@ export interface vtkDataArray extends vtkObject {
     /**
      * Convenience function to insert an array of tuples with insertNextTuple.
      * NOTE: tuples.length must be a multiple of `getNumberOfComponents`.
+     *
      * @param {Array<Number>|TypedArray} tuples
      * @returns The index of the last inserted tuple
      */
@@ -185,36 +181,42 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Get the dimension (n) of the components.
+     *
      * @returns {Number}
      */
     getNumberOfComponents(): number;
 
     /**
-     * Get the actual  number of values in the array, which is equal to `getNumberOfTuples() * getNumberOfComponents()`.
+     * Get the actual number of values in the array, which is equal to `getNumberOfTuples() * getNumberOfComponents()`.
+     *
      * @returns {Number}
      */
     getNumberOfValues(): number;
 
     /**
      * Get the actual number of complete tuples (a component group) in the array.
+     *
      * @returns {Number}
      */
     getNumberOfTuples(): number;
 
     /**
      * Get the data type of this array as a string.
+     *
      * @returns {String}
      */
     getDataType(): string;
 
     /**
      * Return a clone of this array.
+     *
      * @returns {vtkDataArray}
      */
     newClone(): vtkDataArray;
 
     /**
      * Get the name of the array.
+     *
      * @returns {String}
      */
     getName(): string;
@@ -239,6 +241,7 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Deep copy of another vtkDataArray into this one.
+     *
      * @param {vtkDataArray} other
      */
     deepCopy(other: vtkDataArray): void;
@@ -274,6 +277,7 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Set the name of this array.
+     *
      * @param {String} name
      * @returns {Boolean}
      */
@@ -281,6 +285,7 @@ export interface vtkDataArray extends vtkObject {
 
     /**
      * Set the dimension (n) of the components.
+     *
      * @param {Number} numberOfComponents
      */
     setNumberOfComponents(numberOfComponents: number): boolean;
@@ -358,9 +363,7 @@ export function extend(publicAPI: object, model: object, initialValues?: IDataAr
  */
 export function newInstance(initialValues?: object): vtkDataArray;
 
-/**
- * Constants capturing the number of bytes per element based on its data type.
- */
+// Constants capturing the number of bytes per element based on its data type.
 export enum DataTypeByteSize {
     Int8Array,
     Uint8Array,
@@ -373,9 +376,7 @@ export enum DataTypeByteSize {
     Float64Array,
 }
 
-/**
- * Constants capturing the various VTK data types.
- */
+// Constants capturing the various VTK data types.
 export enum VtkDataTypes {
     VOID,
     CHAR,

@@ -2,24 +2,18 @@ import vtkDataArray from "./Common/Core/DataArray";
 import { vtkPipelineConnection } from "./types";
 import { EVENT_ABORT, VOID } from './macros';
 
-/**
- * Object returned on any subscription call
- */
+// Object returned on any subscription call
 export interface vtkSubscription {
 	unsubscribe(): void;
 }
 
-/**
- * Basic object representing a data range
- */
+// Basic object representing a data range
 export interface vtkRange {
 	min: number;
 	max: number;
 }
 
-/**
- * Represents a debounced function.
- */
+// Represents a debounced function.
 export interface vtkDebouncedFunction {
   (...args: any) : any;
   cancel() : void;
@@ -29,9 +23,7 @@ export interface vtkOutputPort {
 	filter: vtkAlgorithm;
 }
 
-/**
- * vtkAlgorithm API
- */
+// vtkAlgorithm API
 export interface vtkAlgorithm {
 
 	/**
@@ -122,9 +114,7 @@ export interface vtkAlgorithm {
 	): void;
 }
 
-/**
-* Base vtkClass which provides MTime tracking and class infrastructure
-*/
+// Base vtkClass which provides MTime tracking and class infrastructure
 export interface vtkObject {
 
 	/**
@@ -165,12 +155,12 @@ export interface vtkObject {
 	 * Method to check if an instance is of a given class name.
 	 * For example such method for a vtkCellArray will return true
 	 * for any of the following string: ['vtkObject', 'vtkDataArray', 'vtkCellArray']
+   *
+   * @param className
 	 */
 	isA(className: string): boolean;
 
-	/**
-	 * Return the instance class name.
-	 */
+	// Return the instance class name.
 	getClassName(): string;
 
 	/**

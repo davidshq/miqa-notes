@@ -2,6 +2,7 @@ import { vtkSubscription, vtkDebouncedFunction, vtkProperty, vtkPropertyDomain }
 
 /**
  * Allow user to redefine vtkXXXMacro method call.
+ *
  * @param name of the macro type [Log, Info, Debug, Error, Warning]
  * @param fn function to use when vtkXXXMacro is called.
  */
@@ -9,44 +10,48 @@ export function setLoggerFunction(name: string, fn: (...args: any) => void): voi
 
 /**
  * Logging function used for level: Log
+ *
  * @param args arguments to print
  */
 export function vtkLogMacro(...args: any): void;
 
 /**
  * Logging function used for level: Info
+ *
  * @param args arguments to print
  */
 export function vtkInfoMacro(...args: any): void;
 
 /**
  * Logging function used for level: Debug
+ *
  * @param args arguments to print
  */
 export function vtkDebugMacro(...args: any): void;
 
 /**
  * Logging function used for level: Error
+ *
  * @param args arguments to print
  */
 export function vtkErrorMacro(...args: any): void;
 
 /**
  * Logging function used for level: Warning
+ *
  * @param args arguments to print
  */
 export function vtkWarningMacro(...args: any): void;
 
 /**
  * Output error only once
- * This is convenient when the error happen in a loop.
- * This allow you to catch the issue while not overloading your output console.
+ *
+ * This is convenient when the error happens in a loop.
+ * This allows you to catch the issue while not overloading your output console.
  */
 export function vtkOnceErrorMacro(str: string): void;
 
-/**
- * A way to create typed array based on its name without using the window namespace
- */
+// A way to create a typed array based on its name without using the window namespace
 export enum TYPED_ARRAYS {
   Float32Array,
   Float64Array,
@@ -80,9 +85,7 @@ export function capitalize(str: string): string;
  */
 export function _capitalize(str: string): string;
 
-/**
- * Lowercase the first letter of the provided string.
- */
+// Lowercase the first letter of the provided string.
 export function uncapitalize(str: string): string;
 
 /**
@@ -94,22 +97,17 @@ export function uncapitalize(str: string): string;
  */
 export function formatBytesToProperUnit(size: number, precision?: number, chunkSize?: number): string;
 
-// ----------------------------------------------------------------------------
-// Convert thousand number with proper separator
-// ----------------------------------------------------------------------------
-
 /**
+ * Convert thousand number with proper separator
  *
  * @param n number to format
  * @param separator (default: ' ')
  */
 export function formatNumbersWithThousandSeparator(n: number, separator?: string): string;
 
-// ----------------------------------------------------------------------------
-// Array helper
-// ----------------------------------------------------------------------------
-
 /**
+ * Array helper
+ *
  * Replace internal arrays with new reference but with same content
  *
  * @param model
@@ -224,6 +222,7 @@ export function setArray(publicAPI: object, model: object, fieldNames: Array<str
 
 /**
  * set/get XXX: add setter and getter for object of type array
+ *
  * @param publicAPI
  * @param model
  * @param fieldNames
@@ -238,6 +237,7 @@ export function setGetArray(publicAPI: object, model: object, fieldNames: Array<
  *   - model.fieldName into model._fieldName
  *   - publicAPI.set_fieldName and publicAPI.set_fieldNameFrom into publicAPI.setFieldName and publicAPI.setFieldNameFrom
  *   - publicAPI.get_fieldName and publicAPI.get_fieldNameByReference into publicAPI.getFieldName and publicAPI.getFieldNameByReference
+ *
  * @param publicAPI
  * @param model
  * @param fieldNames List of field names to move to protected, e.g. ['interactor', 'renderWindow']
@@ -256,9 +256,7 @@ export function moveToProtected(publicAPI: object, model: object, fieldNames: Ar
  */
 export function algo(publicAPI: object, model: object, numberOfInputs: number, numberOfOutputs: number): void;
 
-/**
- * Symbols used as return value for callback
- */
+// Symbols used as return value for callback
 export const VOID: Symbol;
 
 /**
@@ -271,6 +269,7 @@ export function event(publicAPI: object, model: object, eventName: string): void
 
 /**
  * Event callback
+ *
  * @param args
  * @returns symbol to either keep going or interrupt existing callback call stack
  */
@@ -280,6 +279,7 @@ export function VtkCallback(...args: any): void | symbol;
 export interface VtkChangeEvent {
   /**
    * Call any registered callbacks with the given arguments
+   *
    * @param args
    */
   invokeChange(...args: any): void;
@@ -301,11 +301,9 @@ export type VtkExtend = (publicAPI: object, model: object, initialValues: object
 
 export function newInstance(extend: VtkExtend, className: string): any;
 
-// ----------------------------------------------------------------------------
-// Chain function calls
-// ----------------------------------------------------------------------------
-
 /**
+ * Chain function calls
+ *
  * Create a new closure that will chain the call of any provided methods
  * @param fn list of function to call
  */
@@ -313,6 +311,7 @@ export function chain(...fn: Array<Function>): Function;
 
 /**
  * Test if provided object is an actual vtkObject or not
+ * 
  * @param instance
  */
 export function isVtkObject(instance: any): boolean;
