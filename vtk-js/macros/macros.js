@@ -124,10 +124,15 @@
    return str.charAt(0).toLowerCase() + str.slice(1);
  }
  
- // ----------------------------------------------------------------------------
- // Convert byte size into a well formatted string
- // ----------------------------------------------------------------------------
  
+ /**
+  * Convert byte size into a well formatted string
+  * 
+  * @param {*} size 
+  * @param {*} precision 
+  * @param {*} chunkSize 
+  * @returns 
+  */
  export function formatBytesToProperUnit(size, precision = 2, chunkSize = 1000) {
    const units = ['TB', 'GB', 'MB', 'KB'];
    let value = Number(size);
@@ -139,10 +144,13 @@
    return `${value.toFixed(precision)} ${currentUnit}`;
  }
  
- // ----------------------------------------------------------------------------
- // Convert thousand number with proper separator
- // ----------------------------------------------------------------------------
- 
+ /**
+  * Convert thousand number with proper separator
+  * 
+  * @param {*} n 
+  * @param {*} separator 
+  * @returns 
+  */
  export function formatNumbersWithThousandSeparator(n, separator = ' ') {
    const sections = [];
    let size = n;
@@ -157,10 +165,11 @@
    return sections.join(separator);
  }
  
- // ----------------------------------------------------------------------------
- // Array helper
- // ----------------------------------------------------------------------------
- 
+ /**
+  * Array helper
+  * 
+  * @param {*} model 
+  */
  function safeArrays(model) {
    Object.keys(model).forEach((key) => {
      if (Array.isArray(model[key])) {
@@ -169,10 +178,13 @@
    });
  }
  
- // ----------------------------------------------------------------------------
- // shallow equals
- // ----------------------------------------------------------------------------
- 
+ /**
+  * shallow equals
+  * 
+  * @param {*} a 
+  * @param {*} b 
+  * @returns 
+  */
  function shallowEquals(a, b) {
    if (a === b) {
      return true;
@@ -193,12 +205,21 @@
    return false;
  }
  
- // ----------------------------------------------------------------------------
- 
+ /**
+  * 
+  * @param {*} e 
+  * @param {*} value 
+  * @returns 
+  */
  function enumToString(e, value) {
    return Object.keys(e).find((key) => e[key] === value);
  }
  
+ /**
+  * 
+  * @param {*} item 
+  * @returns 
+  */
  function getStateArrayMapFunc(item) {
    if (item && item.isA) {
      return item.getState();
@@ -206,22 +227,24 @@
    return item;
  }
  
- // ----------------------------------------------------------------------------
- // setImmediate
- // ----------------------------------------------------------------------------
- 
+ /**
+  * setImmediate
+  * 
+  * @param {*} fn 
+  */
  export function setImmediateVTK(fn) {
    setTimeout(fn, 0);
  }
  
- // ----------------------------------------------------------------------------
- // measurePromiseExecution
- //
- // Measures the time it takes for a promise to finish from
- //   the time this function is invoked.
- // The callback receives the time it took for the promise to resolve or reject.
- // ----------------------------------------------------------------------------
- 
+ /**
+  * Measures the time it takes for a promise to finish from the time this function
+  * is invoked.
+  * 
+  * The callback receives the time it took for the promise to resolve or reject.
+  * 
+  * @param {*} promise 
+  * @param {*} callback 
+  */
  export function measurePromiseExecution(promise, callback) {
    const start = performance.now();
    promise.finally(() => {
@@ -230,10 +253,13 @@
    });
  }
  
- // ----------------------------------------------------------------------------
- // vtkObject: modified(), onModified(callback), delete()
- // ----------------------------------------------------------------------------
- 
+ /**
+  * vtkObject: modified(), onModified(callback), delete()
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @returns 
+  */
  export function obj(publicAPI = {}, model = {}) {
    // Ensure each instance as a unique ref of array
    safeArrays(model);
@@ -516,6 +542,11 @@
    },
  };
  
+ /**
+  * 
+  * @param {*} field 
+  * @returns 
+  */
  function findSetter(field) {
    if (typeof field === 'object') {
      const fn = objectSetterMap[field.type];
@@ -543,6 +574,12 @@
    };
  }
  
+ /**
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} fields 
+  */
  export function set(publicAPI, model, fields) {
    fields.forEach((field) => {
      if (typeof field === 'object') {
@@ -559,10 +596,13 @@
    });
  }
  
- // ----------------------------------------------------------------------------
- // set/get XXX: add both setters and getters
- // ----------------------------------------------------------------------------
- 
+ /**
+  * set/get XXX: add both setters and getters
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} fieldNames 
+  */
  export function setGet(publicAPI, model, fieldNames) {
    get(publicAPI, model, fieldNames);
    set(publicAPI, model, fieldNames);
@@ -657,10 +697,15 @@
    });
  }
  
- // ----------------------------------------------------------------------------
- // set/get XXX: add setter and getter for object of type array
- // ----------------------------------------------------------------------------
- 
+ /**
+  * set/get XXX: add setter and getter for object of type array
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} fieldNames 
+  * @param {*} size 
+  * @param {*} defaultVal 
+  */
  export function setGetArray(
    publicAPI,
    model,
@@ -681,10 +726,15 @@
      }
    }
  }
- // ----------------------------------------------------------------------------
- // vtkAlgorithm: setInputData(), setInputConnection(), getOutputData(), getOutputPort()
- // ----------------------------------------------------------------------------
  
+ /**
+  * vtkAlgorithm: setInputData(), setInputConnection(), getOutputData(), getOutputPort()
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} numberOfInputs 
+  * @param {*} numberOfOutputs 
+  */
  export function algo(publicAPI, model, numberOfInputs, numberOfOutputs) {
    if (model.inputData) {
      model.inputData = model.inputData.map(vtk);
@@ -996,10 +1046,13 @@
    };
  }
  
- // ----------------------------------------------------------------------------
- // newInstance
- // ----------------------------------------------------------------------------
- 
+ /**
+  * newInstance 
+  * 
+  * @param {*} extend 
+  * @param {*} className 
+  * @returns 
+  */
  export function newInstance(extend, className) {
    const constructor = (initialValues = {}) => {
      const model = {};
@@ -1017,10 +1070,12 @@
    return constructor;
  }
  
- // ----------------------------------------------------------------------------
- // Chain function calls
- // ----------------------------------------------------------------------------
- 
+ /**
+  * Chain function calls
+  * 
+  * @param  {...any} fn 
+  * @returns 
+  */
  export function chain(...fn) {
    return (...args) => fn.filter((i) => !!i).map((i) => i(...args));
  }
@@ -1079,11 +1134,19 @@
  }
  
  // ----------------------------------------------------------------------------
- // Returns a function, that, as long as it continues to be invoked, will not
- // be triggered. The function will be called after it stops being called for
- // N milliseconds. If `immediate` is passed, trigger the function on the
- // leading edge, instead of the trailing.
+ // 
  
+ /**
+  * Returns a function, that, as long as it continues to be invoked, will not
+  * be triggered. The function will be called after it stops being called for
+  * N milliseconds. If `immediate` is passed, trigger the function on the
+  * leading edge, instead of the trailing.
+  * 
+  * @param {*} func 
+  * @param {*} wait 
+  * @param {*} immediate 
+  * @returns 
+  */
  export function debounce(func, wait, immediate) {
    let timeout;
    const debounced = (...args) => {
@@ -1107,10 +1170,14 @@
    return debounced;
  }
  
- // ----------------------------------------------------------------------------
- // Creates a throttled function that only invokes `func` at most once per
- // every `wait` milliseconds.
- 
+ /**
+  * Creates a throttled function that only invokes `func` at most once per
+  * every `wait` milliseconds.
+  * 
+  * @param {*} callback 
+  * @param {*} delay 
+  * @returns 
+  */
  export function throttle(callback, delay) {
    let isThrottled = false;
    let argsToUse = null;
@@ -1136,19 +1203,21 @@
    return wrapper;
  }
  
- // ----------------------------------------------------------------------------
- // keystore(publicAPI, model, initialKeystore)
- //
- //    - initialKeystore: Initial keystore. This can be either a Map or an
- //      object.
- //
- // Generated API
- //  setKey(key, value) : mixed (returns value)
- //  getKey(key) : mixed
- //  getAllKeys() : [mixed]
- //  deleteKey(key) : Boolean
- // ----------------------------------------------------------------------------
  
+ /**
+  * keystore(publicAPI, model, initialKeystore)
+  * 
+  * initialKeystore: Initial keystore. This can be either a Map or an object.
+  * 
+  * Generated API
+  *   setKey(key, value) : mixed (returns value)
+  *   getKey(key) : mixed
+  *   getAllKeys() : [mixed]
+  *   deleteKey(key) : Boolean
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} initialKeystore 
+  */
  export function keystore(publicAPI, model, initialKeystore = {}) {
    model.keystore = Object.assign(model.keystore || {}, initialKeystore);
  
@@ -1449,17 +1518,20 @@
    setImmediateVTK(registerLinks);
  }
  
- // ----------------------------------------------------------------------------
- // proxyPropertyMapping(publicAPI, model, map)
- //
- //   map = {
- //      opacity: { modelKey: 'property', property: 'opacity' },
- //   }
- //
- // Generated API:
- //  Elevate set/get methods from internal object stored in the model to current one
- // ----------------------------------------------------------------------------
- 
+ /**
+  * proxyPropertyMapping(publicAPI, model, map)
+  * 
+  * map = {
+  *   opacity: { modelKey: 'property', property: 'opacity' },
+  * }
+  * 
+  * Generated API:
+  * Elevate set/get methods from internal object stored in the model to current one
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} map 
+  */
  export function proxyPropertyMapping(publicAPI, model, map) {
    const parentDelete = publicAPI.delete;
    const subscriptions = [];
@@ -1486,26 +1558,29 @@
    };
  }
  
- // ----------------------------------------------------------------------------
- // proxyPropertyState(publicAPI, model, state, defaults)
- //
- //   state = {
- //     representation: {
- //       'Surface with edges': { property: { edgeVisibility: true, representation: 2 } },
- //       Surface: { property: { edgeVisibility: false, representation: 2 } },
- //       Wireframe: { property: { edgeVisibility: false, representation: 1 } },
- //       Points: { property: { edgeVisibility: false, representation: 0 } },
- //     },
- //   }
- //
- //   defaults = {
- //      representation: 'Surface',
- //   }
- //
- // Generated API
- //   get / set Representation ( string ) => push state to various internal objects
- // ----------------------------------------------------------------------------
- 
+ /**
+  * proxyPropertyState(publicAPI, model, state, defaults)
+  * 
+  * state = {
+  *  representation: {
+  *    'Surface with edges': { property: { edgeVisibility: true, representation: 2 } },
+  *    Surface: { property: { edgeVisibility: false, representation: 2 } },
+  *    Wireframe: { property: { edgeVisibility: false, representation: 1 } },
+  *    Points: { property: { edgeVisibility: false, representation: 0 } },
+  *  },
+  * }
+  * defaults = {
+  *   representation: 'Surface',
+  * }
+  *
+  * Generated API:
+  * get / set Representation ( string ) => push state to various internal objects
+  * 
+  * @param {*} publicAPI 
+  * @param {*} model 
+  * @param {*} state 
+  * @param {*} defaults 
+  */
  export function proxyPropertyState(
    publicAPI,
    model,
@@ -1729,10 +1804,8 @@
    };
  }
  
- // ----------------------------------------------------------------------------
- // Default export
- // ----------------------------------------------------------------------------
  
+ // Default export
  export default {
    algo,
    capitalize,
