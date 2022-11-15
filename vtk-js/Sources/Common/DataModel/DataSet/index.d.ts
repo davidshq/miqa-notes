@@ -2,44 +2,26 @@ import vtkDataSetAttributes from '../DataSetAttributes';
 import { vtkObject } from "../../../interfaces" ;
 import { FieldAssociations, FieldDataTypes } from "./Constants";
 
-/**
- *
- */
 export interface IDataSetInitialValues {}
 
 export interface vtkDataSet extends vtkObject {
 
-    /**
-     * Get dataset's cell data
-     */
+    // Get dataset's cell data
     getCellData(): vtkDataSetAttributes;
 
-    /**
-     * Get dataset's field data
-     */
+    // Get dataset's field data
     getFieldData(): vtkDataSetAttributes;
 
-    /**
-     * Get dataset's point data.
-     */
+    // Get dataset's point data.
     getPointData(): vtkDataSetAttributes;
 
-    /**
-     * Set dataset's cell data
-     * @param {vtkDataSetAttributes} cellData
-     */
+    // Set dataset's cell data
     setCellData(cellData: vtkDataSetAttributes): boolean;
 
-    /**
-     * Set dataset's field data
-     * @param {vtkDataSetAttributes} fieldData
-     */
+    // Set dataset's field data
     setFieldData(fieldData: vtkDataSetAttributes): boolean;
 
-    /**
-     * Set dataset's point data.
-     * @param {vtkDataSetAttributes} pointData
-     */
+    // Set dataset's point data.
     setPointData(pointData: vtkDataSetAttributes): boolean;
 }
 
@@ -54,6 +36,7 @@ export function extend(publicAPI: object, model: object, initialValues? : IDataS
 
 /**
  * Method used to create a new instance of vtkDataSet.
+ *
  * @param {IDataSetInitialValues} [initialValues] for pre-setting some of its content
  */
 export function newInstance(initialValues? : IDataSetInitialValues): vtkDataSet;
