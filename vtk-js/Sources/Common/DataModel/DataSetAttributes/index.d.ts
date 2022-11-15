@@ -364,7 +364,8 @@ export interface vtkDataSetAttributes extends vtkFieldData {
 
     /**
      * Set the pedigree id data.
-     * @param {vtkDataArray} pedigreeids The pedigree id data.
+     *
+     * @param {vtkDataArray} pedigreeIds The pedigree id data.
      */
     setPedigreeIds(pedigreeIds: vtkDataArray): boolean;
 

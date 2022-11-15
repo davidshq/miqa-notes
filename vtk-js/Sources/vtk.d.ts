@@ -12,6 +12,7 @@ declare function vtk(obj: IvtkObject): unknown;
 
 /**
  * Nest register method under the vtk function
+ *
  * @param vtkClassName
  * @param constructor
  */
