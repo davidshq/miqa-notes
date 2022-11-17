@@ -1,0 +1,1 @@
+- [Nearest Neighbor Interpolation](https://www.giassa.net/?page_id=207)
