@@ -5,12 +5,6 @@ import state from './state';
 import view from './view';
 import properties from './properties';
 
-/**
- *
- * @param {*} publicAPI
- * @param {*} model
- * @param {*} initialValues
- */
 export function extend(publicAPI, model, initialValues = {}) {
   Object.assign(
     model,
