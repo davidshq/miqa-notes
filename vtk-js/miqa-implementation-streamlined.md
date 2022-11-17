@@ -1,0 +1,62 @@
+- `Proxy/Core/ProxyManager/vtkProxyManager`
+    - `.createProxy(group, name, options)`  - Creates a proxy instance in a specified ProxyGroup
+    - `.deleteProxy(proxy)` - Destroys the proxy instance
+    - `.getActiveSource()` - Gets the source being used by the ProxyManager instance[1]
+    - `.getRepresentation()`
+    - `.getSources()`
+    - `.getViews()` - Get the views associated with this specific ProxyManager instance
+    - `.newInstance()`
+- Source
+    - `.setInputData()`
+- View
+    - `.computeVisiblePropBounds()`
+    - `.getCamera()`
+    - `.getContainer()`
+        - `.clientWidth`
+        - `.clientHeight`
+    - `.getName()`
+    - `.getProxyName()`
+    - `.getRenderer()`
+    - `.getRepresentations()`
+    - `.render()`
+    - `.resize()`
+    - `.setBackground()`
+    - `.setContainer()` - Sets the DOM element that should act as the container for the view
+    - `.setOrientationAxesVisibility()`
+    - `.setParallelScale()`
+    - `.setPresentToOrientationAxes()`
+    - `.updateOrientation()`
+- Representation
+    - `.onModified()`
+    - `.setInterpolationType()`
+    - `.setSlice()`
+- Frame
+    - `.getArray()`
+    - `.getArrayByIndex()`
+    - `.getRange()`
+    - `.getPointData()`
+    - `.getScalars()`
+- `.updateProxyProperty()` - on self?
+- `Rendering/Core/ImageProperty/Constants/InterpolationType`
+- `Common/DataModel/ITKHelper/convertItkToVtkImage`
+- `Rendering/Core/CellPicker/vtkCellPicker`
+- `vtkReader` - Instance of below?
+- `IO/Misc/ITKImageReader/vtkITKImageReader`
+    - `.ReadImageArrayBufferFromITK()`
+- `Rendering/Core/ColorTransferFunction/ColorMaps`
+    - `.getPresetByName()`
+    - `.addPreset()`
+- `def.options.activateOnCreate`
+- `Proxy/Core/View2DProxy/vtk2DView`
+- `Proxy/Core/LookupTableProxy/vtkLookupTableProxy`
+- `Proxy/Core/PiecewiseFunctionProxy/vtkPiecewiseFunctionProxy`
+- `Proxy/Core/SourceProxy/vtkProxySource`
+- `Proxy/Representations/SliceRepresentationProxy/vtkSliceRepresentationProxy`
+- `Proxy/Core/View/ViewProxy/vtkView`
+- `Proxy/Representations/VolumeRepresentationProxy/vtkVolumeRepresentationProxy`
+- `Rendering/Profiles/All`
+- `vtkImageData` ?
+- `Filters/General/ImageMarchingCubes/vtkImageMarchingCubes`
+
+# Notes
+[1]: I see plenty of usages of `getActiveSource()` in the vtk.js source code but no declaration?

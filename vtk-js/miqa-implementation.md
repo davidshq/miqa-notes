@@ -1,3 +1,6 @@
+# Introduction
+This is a data dump of the usage of various aspects of VTK within MIQA. [miqa-implementation-streamlined.md] provides a streamlined view.
+
 # General
 - `proxyManager` is an instance of `vtkProxyManager`
 
@@ -28,22 +31,6 @@
 - `InterpolationType` from `Rendering/Core/ImageProperty/Constants`
 - `convertItkToVtkImage` from `ITKHelper` from `Common/DataModel/ITKHelper`
 
-# `viewManager.js`
-- `getNumberOfVisibleViews`
-    - `RemoteView.getContainer` - Gets container element.
-    - `RenderWindow.getViews`
-- `getViewActions`
-    - `proxyManager.getSources()`
-    - `s.getFrame()`
-- `getView`
-    - `RenderWindow.getViews`
-    - `getProxyName()`
-    - `getName()`
-    - `vtkProxyManager.createProxy`
-    - `updateOrientation`
-    - `setBackrgound`
-    - `setPresetToOrientationAxes`
-
 # `crosshairs.js`
 - `vtkCellPicker` from `Rendering/Core/CellPicker`
 
@@ -65,7 +52,7 @@
 
 # `registerReaders.js`
 - `vtkITKImageReader` from `IO/Misc/ITKImageReader`
-    - `.seReadImageArrayBufferFromITK()`
+    - `.ReadImageArrayBufferFromITK()`
 - `vtkReader`
 
 # `ColorMaps.js`
@@ -98,7 +85,7 @@
     - `.updatProxyProperty()` - On self?
 
 # `viewManager.js`
-- `proxyManager`
+- `proxyManager` (`vtkProxyManager`)
     - `.getViews()`
     - `.createProxy()`
     - `.getSources()`
