@@ -1,1 +1,2 @@
 - [Nearest Neighbor Interpolation](https://www.giassa.net/?page_id=207)
+- [Piecewise Function](https://www.storyofmathematics.com/piecewise-functions/)
