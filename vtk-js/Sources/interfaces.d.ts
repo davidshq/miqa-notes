@@ -57,10 +57,6 @@ export interface vtkAlgorithm {
 	 */
 	addInputConnection(outputPort: vtkPipelineConnection): void;
 
-	/**
-	 *
-	 * @param dataset
-	 */
 	addInputData(dataset: any): void;
 
 	/**
