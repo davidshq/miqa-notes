@@ -42,6 +42,10 @@ You can setting a foreign key on an object so that it has a relationship with an
 
 `setting = Setting.objects.create(key="truncation_artifact', type=Setting.objects.get(pk='246d7d1c-a378-464b-84fe-e9c4cdb78651'))`
 
+Also:
+
+`setting = Setting.objects.create(key="T1", value="MIQAMix-0", type=Setting.objects.get(pk='32bb77ec-935b-4691-ae23-880d090c7ee6'), group=SettingsGroup.objects.get(pk="5dc63f2d-b40e-4b03-bfda-adc0a8bfd229"))`
+
 # Perform a Bulk Update
 The following would update all Setting objects to have the FK for group set to the one specified below:
 `Setting.objects.filter().update(group='4807c3eb-7cb9-41b7-a7ac-115ab3be913f')`
@@ -50,3 +54,5 @@ The following would update all Setting objects to have the FK for group set to t
 NOTE: The app name is not `miqa` or `miqa.core` but `core`. You can verify this by executing `Project._meta.app_label` in the Django shell.
 
 `docker-compose run --rm django ./manage.py dumpdata core.Setting > setting.json`
+
+NOTE: Review the file once the export is done to ensure no extra text was included by the dump. Also recommend using a JSON prettifier to make the export readable.
