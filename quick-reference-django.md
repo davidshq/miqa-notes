@@ -1,5 +1,5 @@
 # Access DB Console
-From terminal run `django shell`
+From terminal run `docker-compose run --rm django django-admin shell`
 
 # Access Models from DB Console
 You need to import the model before it is accessible, this follows the pattern:
@@ -56,3 +56,6 @@ NOTE: The app name is not `miqa` or `miqa.core` but `core`. You can verify this 
 `docker-compose run --rm django ./manage.py dumpdata core.Setting > setting.json`
 
 NOTE: Review the file once the export is done to ensure no extra text was included by the dump. Also recommend using a JSON prettifier to make the export readable.
+
+# Compare Default vs Current Django Settings
+`python manage.py diffsettings`

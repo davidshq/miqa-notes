@@ -1,0 +1,24 @@
+# [Python Sandard Library](https://docs.python.org/3/library/)
+- [\_\_future\_\_](https://docs.python.org/3/library/__future__.html) (annotations)
+- argparse
+- base64 (b64decode)
+- configurations (import, values)
+- dateparser
+- datetime (datetime)
+- email.mime.image (MIMEImage)
+- enum (Enum)
+- io (BytesIO, StringIO)
+- json
+- logging
+- math
+- mimetypes
+- os
+- pathlib (Path)
+- random
+- re
+- schema (Optional, Or, Schema, SchemaError, Use)
+- subprocess
+- sys
+- tempfile
+- typing (Dict, List, Optional, TYPE_CHECKING, Union)
+- [uuid](https://docs.python.org/3/library/uuid.html) (uuid4)
