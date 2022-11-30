@@ -3,20 +3,18 @@
 - argparse
 - base64 (b64decode)
 - configurations (import, values)
-- dateparser
 - datetime (datetime)
 - email.mime.image (MIMEImage)
 - enum (Enum)
 - io (BytesIO, StringIO)
 - json
 - logging
-- math
+- math (ML Only)
 - mimetypes
 - os
 - pathlib (Path)
-- random
+- random (ML Only)
 - re
-- schema (Optional, Or, Schema, SchemaError, Use)
 - subprocess
 - sys
 - tempfile
