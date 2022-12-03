@@ -1,5 +1,7 @@
 # Access DB Console
-From terminal run `docker-compose run --rm django django-admin shell`
+From terminal run `docker-compose run --rm django ./manage.py shell`
+
+Note: 
 
 # Access Models from DB Console
 You need to import the model before it is accessible, this follows the pattern:
@@ -22,6 +24,7 @@ Since MIQA uses UUIDs for the primary key it isn't a simple matter to figure out
 `setting.pk`
 
 If you don't have the object you can fetch it using filter and the value of one of it's fields:
+
 ```python
 settings = Setting.objects.filter(key="Artifacts")
 for setting in settings:

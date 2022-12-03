@@ -4,6 +4,21 @@ The function `default_identified_artifacts` in `ScanDecision` (`models/scan_deci
 
 The code removed is:
 ```py
+artifacts = [
+    'normal_variants',
+    'lesions',
+    'full_brain_coverage',
+    'misalignment',
+    'swap_wraparound',
+    'ghosting_motion',
+    'inhomogeneity',
+    'susceptibility_metal',
+    'flow_artifact',
+    'truncation_artifact',
+]
+
+# ...
+
 def default_identified_artifacts():
     return {
         (
