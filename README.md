@@ -13,3 +13,6 @@ MIQA comes with a few sample images one can load into the software and use for t
 
 ## Code
 Currently contains the output of objects from the TS source code for easy reference.
+
+## Debugging
+Note that not all code runs on the `django` instance, Celery related code (e.g. that in `tasks.py`) runs in the `celery` instance. If you are using a debugger on the `django` instance it will not catch the code that is executed on Celery.
