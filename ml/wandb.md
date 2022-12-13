@@ -1,0 +1,5 @@
+- `wandb.config.learning_rate`
+- `wandb.watch`
+- `wandb.run.dir`
+- `wandb.log`
+- `wandb.init`

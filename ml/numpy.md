@@ -1,0 +1,6 @@
+- `np.sum`
+- `np.absolute`
+- `np.any`
+- `np.asarray`
+- `np.empty`
+- `np.ones`

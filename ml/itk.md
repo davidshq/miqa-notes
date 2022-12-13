@@ -1,0 +1,24 @@
+- `itk.ImageIOFactory.CreateImageIO`
+- `itk.CommonEnums.IOFileMode_ReadMode`
+- image_io
+    - `SetFileName`
+    - `ReadImageInformation`
+    - `GetNumberOfDimensions`
+    - `GetDimensions`
+    - `GetDirection`
+- `itk.SpatialOrientationEnums`
+- itk_so_enums
+    - `CoordinateTerms_ITK_COORDINATE_Right`
+    - `..._Left`
+    - `..._Posterior`
+    - `..._Anterior`
+    - `..._Inferior`
+    - `..._Superior`
+    - `CoordinateMajornessTerms_ITK_COORDINATE_PrimaryMinor`
+    - `...SecondaryMinor`
+    - `...TertiaryMinor`
+- `itk.OrientImageFilter.New`
+- orient_filter
+    - `UpdateOutputInformation`
+    - `GetOutput().GetDirection()`
+    - `Update`
