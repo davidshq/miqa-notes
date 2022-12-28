@@ -1,0 +1,9 @@
+numpy>=1.21.1
+itk>=5.3rc4
+torch
+torchio
+tensorboard
+monai>=0.6.0
+pandas
+scikit-learn
+wandb
