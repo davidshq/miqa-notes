@@ -12,7 +12,6 @@
     - autoprefixer
 
 # package.json
-- [@girder/components](https://github.com/girder/girder_web_components) - "Reusable Javascript and VueJS components for interacting with a Girder server."
 - @girder/oauth-client
 - axios
 - [bluebird](https://github.com/petkaantonov/bluebird) - "a full featured promise library with unmatched performance."

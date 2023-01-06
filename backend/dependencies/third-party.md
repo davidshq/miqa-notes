@@ -29,6 +29,9 @@
 ## Django Filters
 - [django_filters](https://django-filter.readthedocs.io/en/stable/index.html) (rest_framework as filters)
 
+## Django 
+[django-configurations](https://django-configurations.readthedocs.io/en/stable/)
+
 ## Django Rest Framework
 - [djangorestframework](https://www.django-rest-framework.org/)
 - rest_framework (django_filters, mixins, permissions, routers, serializers, status)
@@ -49,7 +52,7 @@
 
 ## drf_yasg
 - [drf_yasg](https://drf-yasg.readthedocs.io/en/stable/)
-    - Creates OpenAPI 2.0 docs from DRF.
+    - Creates OpenAPI 2.0 (Swagger) docs from DRF.
     - NOTE: Does not support / intend to support OpenAPI 3.0, recommends drf-spectacular
 - drf_yasg.utils (no_body, openapi,swagger_auto_schema)
 - drf_yasg.views (get_schema_view)
