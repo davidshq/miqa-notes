@@ -1,0 +1,1 @@
+Consolidating some old notes, need to parse through these at some point and integrate anything useful into current notes and then delete.
