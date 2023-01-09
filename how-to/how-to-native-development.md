@@ -1,6 +1,9 @@
 # Finding the Native Development Directions
 In the `dev` folder of MIQA one can find a `NATIVE.md` file which explains how to setup the application to perform local development.
 
+# Run Docker command from repo root, not dev folder
+In the `/dev/README.md` one is instructed to run the `docker-compose` command from within the `/dev` folder. When running the `NATIVE` configuration you'll need to use the `docker-compose.yml` file in the root of the repo. 
+
 # Running Native Development After Performing Standard Dev Environment Setup
 It's worth noting that this can also be run after doing a full setup (e.g. using `dev/README.md`). Ensure all the Docker containers have been shut down and then run the `docker-compose` command in `NATIVE.md`.
 
