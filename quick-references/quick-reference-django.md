@@ -51,7 +51,7 @@ Also:
 
 # Perform a Bulk Update
 The following would update all Setting objects to have the FK for group set to the one specified below:
-`Setting.objects.filter().update(group='4807c3eb-7cb9-41b7-a7ac-115ab3be913f')`
+`Setting.objects.update(group='4807c3eb-7cb9-41b7-a7ac-115ab3be913f')`
 
 # Export Data for Model from MIQA
 NOTE: The app name is not `miqa` or `miqa.core` but `core`. You can verify this by executing `Project._meta.app_label` in the Django shell.
