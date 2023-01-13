@@ -6,7 +6,7 @@ interface IvtkObject {
 /**
  *
  * @param obj
- * @return
+ * @return {unknown}
  */
 declare function vtk(obj: IvtkObject): unknown;
 

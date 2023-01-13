@@ -10,6 +10,7 @@
 
  export const VOID = Symbol('void');
 
+ // TODO: Seems like this will always return 0?
  function getCurrentGlobalMTime() {
    return globalMTime;
  }
@@ -21,8 +22,12 @@
 
  const fakeConsole = {};
 
+ // Does nothing, replaces console methods when
+ // consoe object doesn't have them
  function noOp() {}
 
+ // Create a fake console object with same methods
+ // as real console but these methods do nothing
  const consoleMethods = [
    'log',
    'debug',
@@ -146,6 +151,8 @@
  }
 
  // Array helper
+ // Creates a clone of an objects' arrays to
+ // avoid modifying original arrays
  function safeArrays(model) {
    Object.keys(model).forEach((key) => {
      if (Array.isArray(model[key])) {
@@ -224,6 +231,8 @@
      model.mtime = ++globalMTime;
    }
 
+   // Checks for an existing classHierarchy property on the object and
+   // converts it to a ClassHierarchy instance if necessary.
    if (!('classHierarchy' in model)) {
      model.classHierarchy = new ClassHierarchy('vtkObject');
    } else if (!(model.classHierarchy instanceof ClassHierarchy)) {

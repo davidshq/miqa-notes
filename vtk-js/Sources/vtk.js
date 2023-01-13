@@ -2,11 +2,14 @@ import globalThisShim from 'globalthis';
 
 export const vtkGlobal = globalThisShim(); // returns native globalThis if compliant
 
+// Constant variable holding an object with the key vtkObject
+// and an anonymous function for its value, this function returns null.
 const factoryMapping = {
     vtkObject: () => null,
 };
 
 export default function vtk(obj) {
+    // Make sure we have a valid VTK object
     if (obj === null || obj === undefined) {
         return obj;
     }

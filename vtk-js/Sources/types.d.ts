@@ -4,21 +4,21 @@ import { vtkOutputPort } from './interfaces';
 declare type Nullable<T> = T | null;
 
 /**
- * Alias type for number that are floats
+ * Alias type for numbers that are floats
  *
  * @ignorenaming
  */
 declare type float = number;
 
 /**
- * Alias type for number that are doubles.
+ * Alias type for numbers that are doubles.
  *
  * @ignorenaming
  */
 declare type double = number;
 
 /**
- * Alias type for number that are integer
+ * Alias type for numbers that are integers
  * 
  * @ignorenaming
  */
@@ -35,6 +35,7 @@ declare type TypedArray =
   | Float64Array
   | Float32Array;
 
+// Represents bounds of a 3D object
 declare type Bounds = [number, number, number, number, number, number];
 declare type CellType = number;
 declare type Extent = [number, number, number, number, number, number];
