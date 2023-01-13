@@ -1,8 +1,5 @@
 # Dynamic Settings
-
-One aspect of the Annotations project has been the abstraction of various hard-coded settings in MIQA. MIQA Annotations is directed particularly towards lung scans while the initial use case for MIQA was brain scans, as such some of the models, artifacts, etc. do not align.
-
-Rather than change the hard-coded instances we have chosen to make the settings dynamically configurable.
+MIQA was initially created for brain scans and as such had a number of different settings hard-coded into the application. MIQA Annotations is aimed at lung scans and as such needed to change a number of these hard-coded settings (models, artifacts, etc.). Rather than change the settings in-place we've chosen to implement settings using a Django model.
 
 This document begins with a brief explanation of how one needs to setup the projects when using annotations and then continues with a description of the abstraction created.
 
@@ -32,8 +29,31 @@ This will bring up a form interface for modifying the project. You should set:
 
 There are "Default" groups already created for each of these groups but you'll need to manually select them if you desire to use them, they ARE NOT auto-selected.
 
+## About Settings
+Each setting can provides five fields:
+- key - text field
+- value - text field
+- type - different types of settings
+- group - the group to which this setting belongs (if any)
+- is_type - boolean
+
 ## Adding A Group
-Under **MIQA: CORE** choose *Settings groups* and add a new group. A group is a simple entity with a name and a description.
+Under **MIQA: CORE** choose *Settings* and add a new setting.
+
+In the key field enter a name for your group (e.g. Lung Artifacts).
+
+You can leave the value field empty.
+
+For the 'Type' select 'Group Type' and for the group add it to the appropriate parent group (e.g. Lung Artifacts should be part of the Artifact Groups group).
+
+Finally, make sure that is type is selected.
+
+## Adding Entries to a Group
+Once the group you desire exists in Settings you can add individual entries to that group. For example, you might add the following settings:
+- Key                       Value       Type                                Group                                          Is Type
+- ncanda-grefieldmap-v1     MIQAMix-0   Evaluation File to Model Mappings   Lung Evaluation File to Model Mappings         False
+- FMRI                      MIQAAT1-0   Evaluation File to Model Mappings   Lung Evaluation File to Model Mappings         False
+- DTI                       MIQAAT1-0   Evaluation File to Model Mappings   Lung Evaluation File to Model Mappings         False
 
 ## Adding Settings
 Under **MIQA: CORE** choose *Settings* and add a new setting. Settings can take several values:

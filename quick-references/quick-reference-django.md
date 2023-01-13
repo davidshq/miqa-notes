@@ -53,12 +53,17 @@ Also:
 The following would update all Setting objects to have the FK for group set to the one specified below:
 `Setting.objects.update(group='4807c3eb-7cb9-41b7-a7ac-115ab3be913f')`
 
-# Export Data for Model from MIQA
+
+# Import/Export Data for Model from/to MIQA
 NOTE: The app name is not `miqa` or `miqa.core` but `core`. You can verify this by executing `Project._meta.app_label` in the Django shell.
 
+## Export
 `docker-compose run --rm django ./manage.py dumpdata core.Setting > setting.json`
 
 NOTE: Review the file once the export is done to ensure no extra text was included by the dump. Also recommend using a JSON prettifier to make the export readable.
+
+## Import
+`docker-compose run --rm django ./manage.py loaddata setting.json`
 
 # Compare Default vs Current Django Settings
 `python manage.py diffsettings`
