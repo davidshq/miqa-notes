@@ -1,4 +1,12 @@
-# Celery
+# Development
+
+## docker
+- postgres:latest
+- rabbitmq:management
+- minio/minio:latest
+- python:3.8-slim
+
+## Celery
 - https://docs.celeryproject.org/en/stable/getting-started/introduction.html
 - "Task queues are used as a mechanism to distribute work across threads or machine."
 - "A task queue's input is a unit of work called a task."
@@ -11,15 +19,21 @@
 - https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html
 - https://docs.celeryproject.org/en/stable/getting-started/next-steps.html
 
-# RabbitMQ
-- "message broker"
-
-# minio
+## minio
 https://github.com/minio/minio
 - "High Performance Object Storage...API compatible with Amazon S3...for machine learning, analytics and application data workloads."
 
-
-# Definitions
+# RabbitMQ
+- "message broker"
 - Message broker - Wikipedia: "A message broker (also known as an integration broker or interface engine[1]) is an intermediary computer program module that translates a message from the formal messaging protocol of the sender to the formal messaging protocol of the receiver."
     - "Message brokers are a building block of message-oriented middleware (MOM) but are typically not a replacement for traditional middleware like MOM and remote procedure call (RPC).[2][3]" - DM: What does this mean?
     - "A message broker is an architectural pattern for message validation, transformation, and routing. It mediates communication among applications, minimizing the mutual awareness that applications should have of each other in order to be able to exchange messages, effectively implementing decoupling.[4]"
+
+## Postgres
+- libpq-dev
+- gcc
+- libc6-dev
+
+## Other
+- Supports ASGI (Asynchronous Server Gateway Interface) and WSGI.
+- gunicorn - "Green Unicorn is a pure-Python WSGI server for UNIX." - https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/gunicorn/
