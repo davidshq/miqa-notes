@@ -1,1 +1,0 @@
-`setting = Setting.objects.create(key="Lung Artifact 3", type=Setting.objects.get(pk='246d7d1c-a378-464b-84fe-e9c4cdb78651'), group=SettingsGroup.objects.get(pk='5b8b0ded-b9dc-4463-ad07-36378b7be228'))`
