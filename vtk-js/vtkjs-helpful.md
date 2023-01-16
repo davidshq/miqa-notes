@@ -1,13 +1,23 @@
-- **[vtkDataSet](** - "In vtk a dataset consists of a structure (geometry and topology) and attribute data. The structure is defined implicitly or explicitly as a collection of cells. The geometry of the structure is contained in point coordinates plus the cell interpolation functions. The topology of the dataset structure is defined by cell types and how the cells share their defining points."
+# vtkDataSet
+"In vtk a dataset consists of a structure (geometry and topology) and attribute data. The structure is defined implicitly or explicitly as a collection of cells. The geometry of the structure is contained in point coordinates plus the cell interpolation functions. The topology of the dataset structure is defined by cell types and how the cells share their defining points."
     - See [vtkDataSet](https://kitware.github.io/vtk-js/api/Common_DataModel_DataSet.html))
-- **Proxies** - See pg. 10 and following in [ParaView Scripting with Python](https://itk.org/Wiki/images/f/f9/Servermanager2.pdf). [Refactoring Guru's Proxy article](https://refactoring.guru/design-patterns/proxy) is also helpful.
+
+# Proxies
+See pg. 10 and following in [ParaView Scripting with Python](https://itk.org/Wiki/images/f/f9/Servermanager2.pdf). [Refactoring Guru's Proxy article](https://refactoring.guru/design-patterns/proxy) is also helpful.
     - Thus when one sees something like `View2DProxy` one can read it as "a Proxy for the View2D object".
-- **Annotations** - Text or graphics that are placed in the overlay plane of a render. See VTK Users Guide 11th, pg. 63 and following.
+
+# Annotations
+Text or graphics that are placed in the overlay plane of a render. See VTK Users Guide 11th, pg. 63 and following.
     - An overlay plane is placed on top of the rendering thus it does not interfere with the rendered object.
-- **Piecewise Function** - Controls the appearance of a 3D volume of scalar values. See VTK Users Guide 11th, pg. 144 and following.
+
+# Piecewise Function
+Controls the appearance of a 3D volume of scalar values. See VTK Users Guide 11th, pg. 144 and following.
     - See [Piecewise on Wikipedia](https://en.wikipedia.org/wiki/Piecewise) for understanding the concept.
-- **TrivialProducer (vtkTrivialProducer)** - "Producer for stand-alone data objects...allows data objects that are hand-constructed in a program without another vtk producer to be connected."
+
+# TrivialProducer (vtkTrivialProducer)
+ "Producer for stand-alone data objects...allows data objects that are hand-constructed in a program without another vtk producer to be connected."
     - The use of "hand-constructed" may be a bit misleading, this could include medical scans which were created by CT/MRI. The general concept being something that was constructed into its final data object form without needing to run through various producers in VTK to do so.
     - See [VTK documentation on vtkTrivialProducer](https://vtk.org/doc/nightly/html/classvtkTrivialProducer.html#details).
     - See ParaView documentation on [paraview.simple.TrivialProducer](https://kitware.github.io/paraview-docs/v5.9.0/python/paraview.simple.TrivialProducer.html) from some explanation of the concept.
-- **vtkProxySource**
+
+# vtkProxySource
