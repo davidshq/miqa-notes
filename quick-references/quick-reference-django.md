@@ -70,6 +70,13 @@ The following would update all Setting objects to have the FK for group set to t
 Setting.objects.update(group='4807c3eb-7cb9-41b7-a7ac-115ab3be913f')
 ```
 
+# Database Migrations
+
+## Make Migrations
+`./manage.py makemigrations`
+
+## Apply Migrations
+`./manage.py migrate`
 
 # Import/Export Data for Model from/to MIQA
 NOTE: The app name is not `miqa` or `miqa.core` but `core`. You can verify this by executing `Project._meta.app_label` in the Django shell.
