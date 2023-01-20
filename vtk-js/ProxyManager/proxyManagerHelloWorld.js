@@ -53,26 +53,46 @@ const myProxyConfig = {
                     ui: proxyUI.Slice,
                 }
             },
-            SliceX: createProxyDefinition(
-                vtkSliceRepresentationProxy,
-                proxyUI.Slice,
-                [{ link: 'SliceX', property: 'slice', updateOnBind: true }].concat(proxyLinks.Slice,),
-            ),
-            SliceY: createProxyDefinition(
-                vtkSliceRepresentationProxy,
-                proxyUI.Slice,
-                [{ link: 'SliceY', property: 'slice', updateOnBind: true }].concat(proxyLinks.Slice,),
-            ),
-            SliceZ: createProxyDefinition(
-                vtkSliceRepresentationProxy,
-                proxyUI.Slice,
-                [{ link: 'SliceZ', property: 'slice', updateOnBind: true }].concat(proxyLinks.Slice,),
-            ),
-            Volume: createProxyDefinition(
-                vtkVolumeRepresentationProxy,
-                proxyUI.Volume,
-                proxyLinks.Volume,
-            ),
+            SliceX: {
+                class: vtkSliceRepresentationProxy,
+                options: {
+                    links: [{ 
+                        link: 'SliceX',
+                        property: 'slice',
+                        updateOnBind: true 
+                    }].concat(proxyLinks.Slice),
+                    UI: proxyUI.Slice,
+                }
+            },
+            SliceY: {
+                class: vtkSliceRepresentationProxy,
+                options: {
+                    links: [{
+                        link: 'SliceY', 
+                        property: 'slice', 
+                        updateOnBind: true 
+                    }].concat(proxyLinks.Slice),
+                    UI: proxyUI.Slice,
+                }
+            },
+            SliceZ: {
+                class: vtkSliceRepresentationProxy,
+                options: {
+                    links: [{
+                        link: 'SliceZ',
+                        property: 'slice',
+                        updateOnBind: true 
+                        }].concat(proxyLinks.Slice),
+                    UI: proxyUI.Slice,
+                }
+            },
+            Volume: {
+                class: vtkVolumeRepresentationProxy,
+                options: {
+                    links: proxyLinks.Volume,
+                    ui: proxyUI.Volume,
+                }
+            },
         },
         Views: {
             View3D: createDefaultView(vtkView, proxyUI.View3D),
