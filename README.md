@@ -11,7 +11,7 @@ These informational resources are not canonical and likely contain errors / inco
 ## Sample Images
 MIQA comes with a few sample images one can load into the software and use for testing purposes. For additional NIFTI images you might use [RIDER Lung CT Collection from the Cancer Imaging Archive](https://wiki.cancerimagingarchive.net/display/Public/RIDER+Lung+CT).
 
-## Code
+## Frontend / Code
 Currently contains the output of objects from the TS source code for easy reference.
 
 ## Debugging

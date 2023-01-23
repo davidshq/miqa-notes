@@ -1,4 +1,3 @@
-- `addRegistrationAPI`
 - `unRegisterProxy`
 
 - `publicAPI`
