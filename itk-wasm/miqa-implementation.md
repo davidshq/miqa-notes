@@ -1,9 +1,14 @@
-# `index.ts`
+# Vuex Store (`index.ts`)
 - `itk/readImageArrayBuffer`
-- `WorkerPool`
+- `itk/WorkerPool`
     - `.runTasks()`
     - `.terminateWorkers()`
     - `.cancel()`
 
-# `registerReaders.js`
+# MIQA Vue Entry Point (`main.ts`)
+- `itk/itkConfig`
+    - `itkModulesPath`
+
+# File Reader Registration (`registerReaders.js`)
+- `vtk/IO/Misc/ITKImageReader`
 - `itk/readImageArrayBuffer`
