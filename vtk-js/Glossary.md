@@ -46,3 +46,4 @@ See pg. 10 and following in [ParaView Scripting with Python](https://itk.org/Wik
 - [2]: VTK Visualization Toolkit 4.1, 4.2.1
 - [3]: VTK Visualization Toolkit 4.1, 4.2
 - [4]: See the vtkDataSet section: https://kitware.github.io/vtk-js/api/Common_DataModel_DataSet.html
+- [5]: https://kitware.github.io/vtk-js/api/IO_Misc_ITKImageReader.html
