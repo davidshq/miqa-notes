@@ -1,1 +1,0 @@
-A probably mostly incorrect commentary on the VTK.js ProxyManager source code.
