@@ -84,6 +84,9 @@
 # Scene
 "We call the combination of lights, camera, and actors the scene, and refer to the rendering process as rendering the scene."[1]
 
+# Segmentation
+- "Segmentation, in the context of informatics for radiology, refers to the delineation of areas of interest in imaging in terms of pixels or voxels. Segmentation is often accomplished by computerized algorithms that vary in complexity from simply selecting pixels of similar values in proximity to those that include radiometric features or are based on machine learning. The underlying algorithms that can be used for segmentation include, but are not limited to thresholding (simply taking all the pixels within a certain value range), K-means and Otsu's algorithm."[3]
+
 # Specular Lighting
 - "Specular lighting represents direct reflections of a light source off a shiny object."[1]
 
@@ -99,6 +102,15 @@
 - "Such objects cannot be rendered using a model based exclusively on surface interactions. Instead, we need to consider the changing properties inside the object to properly render them."[1]
 - "volume rendering (i.e., render the surface and interior of an object)."[1]
 
+# Voxel
+- "Voxel is a portmanteau of contractions of the two words 'volume' and 'element' and was coined as a 3-D equivalent of a pixel. It is an individual point in space on a 3-dimensional, regular matrix. The location of each voxel is encoded by its relative relationship to other voxels."[4]
+
+# Windowing (including Window Level and Window Width)
+- "Windowing, also known as grey-level mapping, contrast stretching, histogram modification or contrast enhancement is the process in which the CT image greyscale component of an image is manipulated via the CT numbers; doing this will change the appearance of the picture to highlight particular structures. The brightness of the image is adjusted via the window level. The contrast is adjusted via the window width."[2]
+
 
 # Footnotes:
 [1]: https://kitware.github.io/vtk-examples/site/VTKBook/03Chapter3/
+[2]: https://radiopaedia.org/articles/windowing-ct
+[3]: https://radiopaedia.org/articles/segmentation
+[4]: https://radiopaedia.org/articles/voxel?lang=us
