@@ -14,12 +14,17 @@ This work is being done on the support-multiple-proxy-managers branch.
 # TODO:
 - [X] Make sure functions calling `getView()` pass in the correct proxy manager instance.
 - [X] Rewrite `selectedScanx` in `CompareScans.vue` to use array of proxy managers instead of single proxy manager.
+- [ ] Abstract `slice` method in `VtkViewerCompare.vue` to use array of proxy managers instead of single proxy manager, this involves editing Vuex store's `SET_CURRENT_VTK_INDEX_SLICES`.
+- [ ] Abstract `placeCrosshairs` to support multiple PMs, this involves editing Vuex store's `SET_SLICE_LOCATION`.
+- [ ] Modify `sliceLocation` for multiple PM support.
+- [ ] Modify i/j/k`IndexSlice` for multiple PM support.
 
 # Changes Made
 - Add parameter `whichProxy` that defaults to `0`.
 - Instead of directly accessing `proxyManager` we'll use `proxyManager[whichProxy]`.
 - Specify `whichProxy` when calling `proxyManager` from `ControlPanel.vue`.
 - Add `loadFrame` function to use instead of `swapToFrame` when working with multiple proxy managers.
+- Make `updateCrosshairs` in `VtkViewerCompare.vue` pass a `proxyNum` parameter.
 
 # Not Needed
 - `prepareProxyManager` - The functions calling this function pass in a specific proxyManager, so we don't need to do anything here.
