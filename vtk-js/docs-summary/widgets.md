@@ -36,8 +36,7 @@ https://kitware.github.io/vtk-js/docs/concepts_widgets.html
 - "Representations are scene objects that render based on the attached widget state."
 - "These are not to be instantiated directly; rather, these should be referenced in an implementation of `vtkAbstractWidgetFactory.getRepresentationsForViewType`."
 - "There are two types of representation behaviors: handle and context. The primary difference is handles are pickable and contexts are not pickable."
-- "If
-you want to create a non-pickable representation, extend `vtkContextRepresentation` which sets the representation behavior as a context. Otherwise, extend `vtkHandleRepresentation` to get pickable handles."
+- "If you want to create a non-pickable representation, extend `vtkContextRepresentation` which sets the representation behavior as a context. Otherwise, extend `vtkHandleRepresentation` to get pickable handles."
 - "Widget representations are implemented as VTK.js algorithms."
     - " That is, they must implement `requestData(inData, outData)`, where `inData` contains the widget state and `outData` should be set with the resultant `vtkPolyData`."
     - "Here, `requestData` is intended to generate a relevant representation given a widget state, e.g. placing spheres at points provided as a list in the widget state."
