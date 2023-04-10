@@ -19,3 +19,14 @@ Once created you can open this file and see new lines added to the file as you n
 At the very top of the Test Explorer you can execute all tests. There is also the option to execute individual tests by clicking the play button next to the test name.
 
 If you have the test opened you will be able to see Playwright executing the test line-by-line and the ms it took to run each step.
+
+## Cleaning DB
+The screenshots need to be identical in order for them to pass. To do this we need to ensure the DB is in essentially the same state as it was before commencing tests.
+
+There is a new `test_db_reset` manage.py command that will delete scan decisions. Currently it is run manually as-needed (generally between each test run):
+
+`./manage.py test_db_reset`
+
+## Updating Screenshots
+If changes are made to a page that should affect the screenshots then we need to have Playwright update it's "standard" screenshots:
+- `npx playwright test --update-snapshots`
