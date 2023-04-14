@@ -1,4 +1,4 @@
-# [Python Sandard Library](https://docs.python.org/3/library/)
+# [Python Standard Library](https://docs.python.org/3/library/)
 - [\_\_future\_\_](https://docs.python.org/3/library/__future__.html) (annotations)
 - argparse
 - base64 (b64decode)
